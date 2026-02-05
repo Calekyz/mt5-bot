@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" dir="auto" class="light">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>MT5 Installation Guide | Expert Advisor Setup</title>
+        <style>
+            :root { font-size: 62.5%; }
+            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            
+            .main-nav { background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
+            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .nav-menu { display: flex; gap: 40px; align-items: center; }
+            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; }
+            .nav-link:hover, .nav-link.active { color: #3b82f6; }
+            
+            .install-container { max-width: 1000px; margin: 90px auto 60px; padding: 0 20px; }
+            .install-header { text-align: center; margin-bottom: 50px; }
+            .install-title { font-size: 4.2rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .install-subtitle { font-size: 1.8rem; color: #94a3b8; line-height: 1.6; }
+            
+            /* Steps */
+            .steps-container { margin-top: 50px; }
+            .step { display: flex; margin-bottom: 50px; background: rgba(30, 41, 59, 0.7); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); }
+            .step-number { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; width: 80px; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; font-weight: 800; }
+            .step-content { padding: 30px; flex: 1; }
+            .step-title { font-size: 2.4rem; font-weight: 700; margin-bottom: 15px; color: white; }
+            .step-description { font-size: 1.6rem; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; }
+            .step-image { margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); }
+            .step-image img { width: 100%; display: block; }
+            .step-code { background: #1e293b; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 1.4rem; color: #e2e8f0; border-left: 4px solid #3b82f6; }
+            
+            /* Requirements */
+            .requirements { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 30px; margin-bottom: 50px; border: 2px solid #3b82f6; }
+            .requirements h2 { color: #3b82f6; margin-bottom: 25px; }
+            .req-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+            .req-item { padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+            .req-item i { font-size: 2.4rem; margin-bottom: 15px; display: block; }
+            .req-item h3 { margin-bottom: 10px; }
+            
+            /* Troubleshooting */
+            .troubleshooting { background: rgba(239, 68, 68, 0.1); border-radius: 15px; padding: 30px; margin-top: 50px; border: 1px solid rgba(239, 68, 68, 0.3); }
+            .troubleshooting h2 { color: #ef4444; margin-bottom: 25px; }
+            .issue { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+            .issue:last-child { border-bottom: none; }
+            .issue h3 { color: #fca5a5; margin-bottom: 10px; }
+            
+            /* Buttons */
+            .btn { padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1.6rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; }
+            .btn-primary:hover { transform: translateY(-2px); }
+            .btn-container { text-align: center; margin-top: 50px; }
+            
+            @media (max-width: 768px) {
+                .step { flex-direction: column; }
+                .step-number { width: 100%; height: 60px; }
+                .nav-menu { display: none; }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
+                    <a href="ea-download.html" class="nav-link">EA Download</a>
+                    <a href="installation.html" class="nav-link active">Installation</a>
+                    <a href="backtesting.html" class="nav-link">Backtesting</a>
+                    <a href="contact.html" class="nav-link">Support</a>
+                </div>
+                <div class="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="install-container">
+            <!-- Header -->
+            <div class="install-header">
+                <h1 class="install-title">🛠️ MT5 Installation Guide</h1>
+                <p class="install-subtitle">Step-by-step instructions to install and configure the MT5 Expert Advisor on your MetaTrader 5 platform.</p>
+            </div>
+
+            <!-- Requirements -->
+            <div class="requirements">
+                <h2>📋 System Requirements</h2>
+                <div class="req-list">
+                    <div class="req-item">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">💻</div>
+                        <h3>MetaTrader 5</h3>
+                        <p style="color: #94a3b8;">Build 4000 or higher</p>
+                    </div>
+                    <div class="req-item">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🖥️</div>
+                        <h3>Operating System</h3>
+                        <p style="color: #94a3b8;">Windows 10/11 or macOS</p>
+                    </div>
+                    <div class="req-item">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">📈</div>
+                        <h3>Broker Account</h3>
+                        <p style="color: #94a3b8;">MT5-enabled forex broker</p>
+                    </div>
+                    <div class="req-item">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">⚡</div>
+                        <h3>Internet Connection</h3>
+                        <p style="color: #94a3b8;">Stable, minimum 10 Mbps</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Installation Steps -->
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Download MetaTrader 5</h2>
+                        <p class="step-description">If you don't have MT5 installed, download it from your broker's website or from the official MetaQuotes website.</p>
+                        <div class="step-code">
+                            Recommended Brokers:<br>
+                            • IC Markets<br>
+                            • Pepperstone<br>
+                            • FXTM<br>
+                            • XM<br>
+                            • ThinkMarkets
+                        </div>
+                        <div class="step-image">
+                            <!-- Image placeholder -->
+                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
+                                [MT5 Platform Screenshot]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Download the EA File</h2>
+                        <p class="step-description">Download the MT5 Bot Pro Expert Advisor file from our download page.</p>
+                        <div class="step-code">
+                            File: MT5_Bot_Pro.ex5<br>
+                            Size: 4.2 MB<br>
+                            Version: 2.1.4
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <a href="ea-download.html" class="btn btn-primary">⬇ Download EA File</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Locate MT5 Data Folder</h2>
+                        <p class="step-description">Find your MT5 data folder where Expert Advisors are stored.</p>
+                        <div class="step-code">
+                            Windows Path:<br>
+                            C:\Users\[YourName]\AppData\Roaming\MetaQuotes\Terminal\[TerminalID]\MQL5\Experts<br><br>
+                            Quick Access: In MT5, click File → Open Data Folder
+                        </div>
+                        <div class="step-image">
+                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
+                                [Data Folder Screenshot]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Copy EA to Experts Folder</h2>
+                        <p class="step-description">Copy the downloaded EA file to the Experts folder in your MT5 data directory.</p>
+                        <div class="step-code">
+                            Steps:<br>
+                            1. Open the downloaded .ex5 file location<br>
+                            2. Copy MT5_Bot_Pro.ex5<br>
+                            3. Paste into MQL5/Experts folder<br>
+                            4. Restart MT5 platform
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Enable AutoTrading</h2>
+                        <p class="step-description">Enable automated trading in MT5 and attach the EA to a chart.</p>
+                        <div class="step-code">
+                            1. In MT5, click Tools → Options → Expert Advisors<br>
+                            2. Check "Allow automated trading"<br>
+                            3. Click OK and restart MT5<br>
+                            4. Drag EA from Navigator to any forex chart
+                        </div>
+                        <div class="step-image">
+                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
+                                [AutoTrading Settings Screenshot]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Configure Settings</h2>
+                        <p class="step-description">Configure the EA settings according to your risk tolerance and trading preferences.</p>
+                        <div class="step-code">
+                            Recommended Settings:<br>
+                            • Risk per Trade: 1-2%<br>
+                            • Max Lots: 0.1-1.0<br>
+                            • Stop Loss: 20-50 pips<br>
+                            • Take Profit: 30-80 pips<br>
+                            • Trading Hours: All sessions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h2 class="step-title">Activate License</h2>
+                        <p class="step-description">Enter your license key to activate the full version of the EA.</p>
+                        <div class="step-code">
+                            Activation Process:<br>
+                            1. Purchase license from our website<br>
+                            2. Receive license key via email<br>
+                            3. Enter key in EA settings window<br>
+                            4. Click Activate<br>
+                            5. Restart EA if needed
+                        </div>
+                        <div style="margin: 20px 0;">
+                            <a href="pricing.html" class="btn btn-primary">🎫 Get License Key</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="troubleshooting">
+                <h2>🚨 Troubleshooting Common Issues</h2>
+                
+                <div class="issue">
+                    <h3>EA Not Appearing in Navigator</h3>
+                    <p style="color: #94a3b8;">Make sure you placed the .ex5 file in the correct Experts folder and restarted MT5. Check that the file is not blocked by Windows.</p>
+                </div>
+                
+                <div class="issue">
+                    <h3>AutoTrading Not Working</h3>
+                    <p style="color: #94a3b8;">Enable DLL imports in MT5 settings (Tools → Options → Expert Advisors → Allow DLL imports). Also check your broker allows EAs.</p>
+                </div>
+                
+                <div class="issue">
+                    <h3>EA Not Placing Trades</h3>
+                    <p style="color: #94a3b8;">Check that you have sufficient margin, trading is enabled for the symbol, and market is open. Verify EA settings are correct.</p>
+                </div>
+                
+                <div class="issue">
+                    <h3>Error 133 or 138</h3>
+                    <p style="color: #94a3b8;">These are trading errors. Error 133 means invalid stops, Error 138 means requote. Adjust your stop loss/take profit levels.</p>
+                </div>
+            </div>
+
+            <!-- Support Button -->
+            <div class="btn-container">
+                <a href="contact.html" class="btn btn-primary" style="padding: 20px 40px; font-size: 1.8rem;">
+                    🆘 Need Help? Contact Support
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
