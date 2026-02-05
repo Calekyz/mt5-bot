@@ -2,7 +2,7 @@
 <html lang="en" dir="auto" class="light">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
+        <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <meta name="title" content="MT5 Forex Trading Bot | Automated Expert Advisor" />
         <meta name="description" content="Professional MT5 Expert Advisor for automated forex trading. AI-powered signals, risk management, and 24/7 trading." />
@@ -22,36 +22,47 @@
             
             /* Hero Section */
             .hero-section { padding: 150px 0 100px; text-align: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-            .hero-title { font-size: 5.6rem; font-weight: 800; margin-bottom: 30px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .hero-subtitle { font-size: 2.2rem; color: #94a3b8; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; }
+            .hero-title { font-size: 4.8rem; font-weight: 800; margin-bottom: 30px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .hero-subtitle { font-size: 2rem; color: #94a3b8; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; }
             
             /* Buttons */
-            .btn { padding: 15px 40px; border-radius: 10px; font-weight: 600; font-size: 1.8rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+            .btn { padding: 15px 40px; border-radius: 10px; font-weight: 600; font-size: 1.8rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
             .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; }
             .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
             .btn-outline { background: transparent; color: #3b82f6; border: 2px solid #3b82f6; }
+            .btn-outline:hover { background: #3b82f6; color: white; }
             
             /* Features */
             .features-section { padding: 100px 0; background: rgba(30, 41, 59, 0.5); }
+            .section-title { text-align: center; font-size: 3.6rem; margin-bottom: 60px; color: white; }
             .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 0 20px; }
-            .feature-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); }
+            .feature-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+            .feature-card:hover { transform: translateY(-10px); border-color: #3b82f6; }
             .feature-icon { font-size: 4rem; margin-bottom: 25px; }
-            .feature-title { font-size: 2.4rem; margin-bottom: 20px; }
-            .feature-description { color: #94a3b8; line-height: 1.6; }
+            .feature-title { font-size: 2.4rem; margin-bottom: 20px; color: white; }
+            .feature-description { color: #94a3b8; line-height: 1.6; font-size: 1.6rem; }
             
             /* CTA */
             .cta-section { padding: 100px 0; text-align: center; }
-            .cta-title { font-size: 3.6rem; margin-bottom: 30px; }
+            .cta-title { font-size: 3.6rem; margin-bottom: 30px; color: white; }
             
             /* Footer */
             .main-footer { background: #0f172a; border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 60px 20px 30px; }
             .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-            .copyright { text-align: center; margin-top: 60px; color: #64748b; }
+            .footer-column h3 { color: white; margin-bottom: 25px; font-size: 2rem; }
+            .footer-links { list-style: none; padding: 0; }
+            .footer-links li { margin-bottom: 15px; }
+            .footer-links a { color: #94a3b8; text-decoration: none; font-size: 1.6rem; transition: color 0.3s; }
+            .footer-links a:hover { color: #3b82f6; }
+            .copyright { text-align: center; margin-top: 60px; color: #64748b; font-size: 1.4rem; }
             
+            /* Responsive */
             @media (max-width: 768px) {
                 .nav-menu { display: none; }
-                .hero-title { font-size: 3.6rem; }
-                .hero-subtitle { font-size: 1.8rem; }
+                .hero-title { font-size: 3.2rem; }
+                .hero-subtitle { font-size: 1.6rem; }
+                .features-grid { grid-template-columns: 1fr; }
+                .btn { width: 100%; margin-bottom: 15px; }
             }
         </style>
     </head>
@@ -62,13 +73,12 @@
                 <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
                 <div class="nav-menu">
                     <a href="index.html" class="nav-link active">Home</a>
-                    <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
-                    <a href="forex-signals.html" class="nav-link">Signals</a>
-                    <a href="ea-download.html" class="nav-link">EA Download</a>
+                    <a href="mt5-bot.html" class="nav-link">Trading Dashboard</a>
+                    <a href="forex-signals.html" class="nav-link">Live Signals</a>
+                    <a href="ea-download.html" class="nav-link">Download EA</a>
                     <a href="installation.html" class="nav-link">Installation</a>
-                    <a href="backtesting.html" class="nav-link">Backtesting</a>
+                    <a href="backtesting.html" class="nav-link">Performance</a>
                     <a href="broker-setup.html" class="nav-link">Brokers</a>
-                    <a href="pricing.html" class="nav-link">Pricing</a>
                 </div>
                 <div class="nav-auth">
                     <a href="login.html" class="btn btn-outline">Login</a>
@@ -81,13 +91,13 @@
         <section class="hero-section">
             <div class="hero-container">
                 <h1 class="hero-title">🚀 Automated MT5 Forex Trading Bot</h1>
-                <p class="hero-subtitle">Professional Expert Advisor for MetaTrader 5. Trade forex 24/7 with AI-powered signals, advanced risk management, and proven performance.</p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <p class="hero-subtitle">Professional Expert Advisor for MetaTrader 5. Trade forex 24/7 with AI-powered signals, advanced risk management, and proven 87.3% win rate.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
                     <a href="ea-download.html" class="btn btn-primary">
                         ⬇ Download EA Now
                     </a>
                     <a href="mt5-bot.html" class="btn btn-outline">
-                        📊 Live Demo
+                        📊 Live Trading Dashboard
                     </a>
                 </div>
             </div>
@@ -95,21 +105,37 @@
 
         <!-- Features -->
         <section class="features-section">
+            <h2 class="section-title">🔥 Why Choose Our MT5 Bot</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
                     <h3 class="feature-title">AI-Powered Trading</h3>
-                    <p class="feature-description">Advanced algorithms analyze market patterns and execute trades with precision timing.</p>
+                    <p class="feature-description">Advanced algorithms analyze market patterns and execute trades with precision timing. No emotions, just data-driven decisions.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📈</div>
                     <h3 class="feature-title">87.3% Win Rate</h3>
-                    <p class="feature-description">Proven performance with consistent monthly returns and controlled risk management.</p>
+                    <p class="feature-description">Proven performance with consistent monthly returns. Backtested on 5+ years of historical data with controlled risk management.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">24/7 Trading</h3>
-                    <p class="feature-description">Never miss a trading opportunity. The bot works continuously across all market sessions.</p>
+                    <h3 class="feature-title">24/7 Automated Trading</h3>
+                    <p class="feature-description">Never miss a trading opportunity. The bot works continuously across all market sessions - London, New York, Tokyo, Sydney.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Risk Management</h3>
+                    <p class="feature-description">Advanced stop-loss, take-profit, and position sizing algorithms to protect your capital and maximize profits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile Monitoring</h3>
+                    <p class="feature-description">Monitor your trades from anywhere with our mobile-friendly dashboard and Telegram signal alerts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Auto Updates</h3>
+                    <p class="feature-description">Regular strategy updates and improvements based on market conditions. Always trading with the latest algorithms.</p>
                 </div>
             </div>
         </section>
@@ -117,40 +143,76 @@
         <!-- CTA -->
         <section class="cta-section">
             <h2 class="cta-title">Start Automated Forex Trading Today</h2>
-            <p style="color: #94a3b8; font-size: 1.8rem; max-width: 800px; margin: 0 auto 40px;">Join thousands of successful traders using our MT5 Expert Advisor.</p>
+            <p style="color: #94a3b8; font-size: 1.8rem; max-width: 800px; margin: 0 auto 40px;">Join thousands of successful traders using our MT5 Expert Advisor. No coding required - just install and start trading.</p>
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                 <a href="signup.html" class="btn btn-primary" style="padding: 20px 50px;">
-                    ✨ Start Free Trial
+                    ✨ Start 14-Day Free Trial
                 </a>
                 <a href="backtesting.html" class="btn btn-outline" style="padding: 20px 50px;">
-                    📊 View Results
+                    📊 View Performance Results
                 </a>
             </div>
+            <p style="color: #64748b; margin-top: 30px; font-size: 1.4rem;">No credit card required for free trial</p>
         </section>
 
         <!-- Footer -->
         <footer class="main-footer">
             <div class="footer-container">
-                <div>
-                    <h3 style="color: white; margin-bottom: 25px;">MT5 Bot Pro</h3>
-                    <p style="color: #94a3b8;">Professional Expert Advisor for MetaTrader 5. Automated forex trading made simple.</p>
+                <div class="footer-column">
+                    <h3>MT5 Bot Pro</h3>
+                    <p style="color: #94a3b8; font-size: 1.6rem; line-height: 1.6;">Professional Expert Advisor for MetaTrader 5. Automated forex trading made simple and profitable.</p>
                 </div>
-                <div>
-                    <h3 style="color: white; margin-bottom: 25px;">Quick Links</h3>
-                    <a href="ea-download.html" style="display: block; color: #94a3b8; margin-bottom: 15px;">EA Download</a>
-                    <a href="installation.html" style="display: block; color: #94a3b8; margin-bottom: 15px;">Installation Guide</a>
-                    <a href="broker-setup.html" style="display: block; color: #94a3b8;">Broker Setup</a>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="ea-download.html">EA Download</a></li>
+                        <li><a href="installation.html">Installation Guide</a></li>
+                        <li><a href="broker-setup.html">Broker Setup</a></li>
+                        <li><a href="pricing.html">Pricing Plans</a></li>
+                    </ul>
                 </div>
-                <div>
-                    <h3 style="color: white; margin-bottom: 25px;">Support</h3>
-                    <a href="contact.html" style="display: block; color: #94a3b8; margin-bottom: 15px;">Contact Us</a>
-                    <a href="pricing.html" style="display: block; color: #94a3b8; margin-bottom: 15px;">Pricing</a>
-                    <a href="login.html" style="display: block; color: #94a3b8;">Client Login</a>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="backtesting.html">Backtesting Results</a></li>
+                        <li><a href="forex-signals.html">Live Signals</a></li>
+                        <li><a href="mt5-bot.html">Trading Dashboard</a></li>
+                        <li><a href="contact.html">Support Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Risk Disclosure</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="copyright">
-                © 2024 MT5 Bot Pro. MetaTrader 5 is a trademark of MetaQuotes Software Corp.
+                © 2024 MT5 Bot Pro. All rights reserved. MetaTrader 5 is a trademark of MetaQuotes Software Corp.
+                <br>Forex trading involves risk and may not be suitable for all investors.
             </div>
         </footer>
+
+        <script>
+            // Simple script for button interactions
+            document.addEventListener('DOMContentLoaded', function() {
+                // Add click effects to buttons
+                document.querySelectorAll('.btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        if (this.getAttribute('href') === '#') {
+                            e.preventDefault();
+                            alert('This feature will be available soon! Currently setting up the MT5 bot pages.');
+                        }
+                    });
+                });
+
+                // Update copyright year
+                document.querySelector('.copyright').innerHTML = 
+                    document.querySelector('.copyright').innerHTML.replace('2024', new Date().getFullYear());
+            });
+        </script>
     </body>
 </html>
