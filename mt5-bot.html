@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" dir="auto" class="light">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>EA Download | MT5 Expert Advisor</title>
+        <style>
+            :root { font-size: 62.5%; }
+            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            
+            .main-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
+            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .nav-menu { display: flex; gap: 40px; align-items: center; }
+            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; position: relative; padding: 5px 0; }
+            .nav-link:hover, .nav-link.active { color: #3b82f6; }
+            .nav-auth { display: flex; gap: 15px; align-items: center; }
+            
+            .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; min-height: 44px; }
+            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border: none; }
+            .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+            
+            .download-container { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; }
+            .download-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border-radius: 20px; padding: 50px; border: 2px solid #3b82f6; text-align: center; }
+            .download-icon { font-size: 6rem; margin-bottom: 30px; }
+            .download-title { font-size: 3.6rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .download-subtitle { font-size: 1.8rem; color: #94a3b8; margin-bottom: 40px; line-height: 1.6; }
+            .feature-list { text-align: left; max-width: 600px; margin: 40px auto; }
+            .feature-list li { padding: 15px 0; font-size: 1.6rem; color: #e2e8f0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+            .feature-list li:last-child { border-bottom: none; }
+            .feature-list li:before { content: "✓"; color: #10b981; margin-right: 15px; font-weight: bold; }
+            
+            .instructions { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 30px; margin-top: 50px; text-align: left; }
+            .instructions h3 { color: #3b82f6; margin-bottom: 20px; }
+            .step { margin-bottom: 25px; }
+            .step-number { display: inline-block; width: 30px; height: 30px; background: #3b82f6; border-radius: 50%; text-align: center; line-height: 30px; margin-right: 15px; }
+        </style>
+    </head>
+    <body>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
+                    <a href="ea-download.html" class="nav-link active">EA Download</a>
+                    <a href="installation.html" class="nav-link">Installation</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                </div>
+                <div class="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Get License</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="download-container">
+            <div class="download-card">
+                <div class="download-icon">⬇️</div>
+                <h1 class="download-title">Download MT5 Expert Advisor</h1>
+                <p class="download-subtitle">Professional forex trading bot for MetaTrader 5. Version 2.1.4</p>
+                
+                <div class="feature-list">
+                    <li>AI-Powered Trading Signals</li>
+                    <li>Risk Management System</li>
+                    <li>Multiple Currency Pairs</li>
+                    <li>24/7 Automated Trading</li>
+                    <li>Money Management</li>
+                    <li>Backtesting Capabilities</li>
+                </div>
+                
+                <button class="btn btn-primary" style="padding: 20px 50px; font-size: 2rem; margin-top: 30px;" onclick="downloadEA()">
+                    ⬇ Download EA.mq5 (v2.1.4)
+                </button>
+                
+                <p style="color: #94a3b8; margin-top: 20px; font-size: 1.4rem;">
+                    File size: 4.2 MB | Compatible: MT5 Build 4000+
+                </p>
+            </div>
+            
+            <div class="instructions">
+                <h3>📋 Installation Instructions</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Download the EA file</strong>
+                    <p style="color: #94a3b8; margin-top: 5px;">Click the download button above to get EA.mq5</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Copy to MT5 Folder</strong>
+                    <p style="color: #94a3b8; margin-top: 5px;">Navigate to: C:\Users\[YourName]\AppData\Roaming\MetaQuotes\Terminal\[TerminalID]\MQL5\Experts</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Restart MT5</strong>
+                    <p style="color: #94a3b8; margin-top: 5px;">Close and reopen MetaTrader 5 platform</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Attach to Chart</strong>
+                    <p style="color: #94a3b8; margin-top: 5px;">Drag "MT5 Bot Pro" from Navigator to any forex chart</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function downloadEA() {
+                alert('Downloading MT5 Bot Pro EA.mq5...\n\nFor demo version: Limited to 7 trades per day\nFor full version: Purchase license key');
+                // In real implementation, this would trigger file download
+                // window.location.href = 'downloads/mt5-bot-pro.mq5';
+            }
+        </script>
+    </body>
+</html>
