@@ -42,6 +42,27 @@
             .feature-title { font-size: 2.4rem; margin-bottom: 20px; color: white; }
             .feature-description { color: #94a3b8; line-height: 1.6; font-size: 1.6rem; }
             
+            /* Pricing Section */
+            .pricing-section { padding: 100px 0; background: #0f172a; }
+            .pricing-title { text-align: center; font-size: 3.6rem; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+            .pricing-subtitle { text-align: center; color: #94a3b8; font-size: 1.8rem; max-width: 600px; margin: 0 auto 60px; line-height: 1.6; }
+            .pricing-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 0 20px; }
+            .pricing-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; position: relative; }
+            .pricing-card:hover { transform: translateY(-10px); border-color: #3b82f6; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+            .pricing-card.popular { border: 2px solid #3b82f6; transform: scale(1.05); background: rgba(59, 130, 246, 0.05); }
+            .pricing-card.popular:hover { transform: scale(1.05) translateY(-10px); }
+            .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 8px 25px; border-radius: 20px; font-size: 1.4rem; font-weight: 600; }
+            .plan-header { margin-bottom: 30px; }
+            .plan-name { font-size: 2.4rem; margin-bottom: 15px; color: white; font-weight: 600; }
+            .price { font-size: 5.6rem; font-weight: 800; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
+            .price-period { color: #94a3b8; font-size: 1.6rem; margin-bottom: 30px; }
+            .plan-features { list-style: none; padding: 0; margin: 0 0 40px; text-align: left; }
+            .plan-features li { color: #cbd5e1; margin-bottom: 15px; font-size: 1.6rem; padding-left: 25px; position: relative; }
+            .plan-features li:before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+            .plan-features li.disabled { color: #64748b; }
+            .plan-features li.disabled:before { content: "✗"; color: #ef4444; }
+            .pricing-note { text-align: center; color: #64748b; font-size: 1.4rem; margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+            
             /* CTA */
             .cta-section { padding: 100px 0; text-align: center; }
             .cta-title { font-size: 3.6rem; margin-bottom: 30px; color: white; }
@@ -62,6 +83,9 @@
                 .hero-title { font-size: 3.2rem; }
                 .hero-subtitle { font-size: 1.6rem; }
                 .features-grid { grid-template-columns: 1fr; }
+                .pricing-grid { grid-template-columns: 1fr; }
+                .pricing-card.popular { transform: none; }
+                .pricing-card.popular:hover { transform: translateY(-10px); }
                 .btn { width: 100%; margin-bottom: 15px; }
             }
         </style>
@@ -79,6 +103,7 @@
                     <a href="installation.html" class="nav-link">Installation</a>
                     <a href="backtesting.html" class="nav-link">Performance</a>
                     <a href="broker-setup.html" class="nav-link">Brokers</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
                 </div>
                 <div class="nav-auth">
                     <a href="login.html" class="btn btn-outline">Login</a>
@@ -96,8 +121,8 @@
                     <a href="ea-download.html" class="btn btn-primary">
                         ⬇ Download EA Now
                     </a>
-                    <a href="mt5-bot.html" class="btn btn-outline">
-                        📊 Live Trading Dashboard
+                    <a href="#pricing" class="btn btn-outline">
+                        💰 View Pricing Plans
                     </a>
                 </div>
             </div>
@@ -140,6 +165,77 @@
             </div>
         </section>
 
+        <!-- PRICING SECTION (NEWLY ADDED) -->
+        <section class="pricing-section" id="pricing">
+            <h2 class="pricing-title">💰 Simple & Transparent Pricing</h2>
+            <p class="pricing-subtitle">Choose the plan that fits your trading goals. All plans include a 14-day free trial.</p>
+            
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Starter Plan</h3>
+                        <div class="price">$29</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>Full MT5 Bot Access</li>
+                        <li>2 Currency Pairs (EUR/USD, GBP/USD)</li>
+                        <li>Basic Risk Management</li>
+                        <li>Email Support</li>
+                        <li class="disabled">Telegram Signal Alerts</li>
+                        <li class="disabled">Auto Strategy Updates</li>
+                    </ul>
+                    <a href="signup.html?plan=starter" class="btn btn-outline" style="width: 100%; padding: 18px;">
+                        Start Free Trial
+                    </a>
+                </div>
+                
+                <!-- Pro Plan (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Pro Trader</h3>
+                        <div class="price">$79</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="plan-features">
+                        <li><strong>Everything in Starter, plus:</strong></li>
+                        <li>7 Major Currency Pairs</li>
+                        <li>Advanced AI Algorithms</li>
+                        <li>Telegram Signal Alerts</li>
+                        <li>Priority Email & Chat Support</li>
+                        <li>Auto Strategy Updates</li>
+                    </ul>
+                    <a href="signup.html?plan=pro" class="btn btn-primary" style="width: 100%; padding: 18px;">
+                        Start Free Trial
+                    </a>
+                </div>
+                
+                <!-- VIP Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">VIP Elite</h3>
+                        <div class="price">$199</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="plan-features">
+                        <li><strong>Everything in Pro, plus:</strong></li>
+                        <li>All 28 Forex Pairs</li>
+                        <li>Custom Strategy Optimization</li>
+                        <li>24/7 Phone Support</li>
+                        <li>Dedicated Account Manager</li>
+                        <li>Weekly Performance Reports</li>
+                    </ul>
+                    <a href="signup.html?plan=vip" class="btn btn-outline" style="width: 100%; padding: 18px;">
+                        Start Free Trial
+                    </a>
+                </div>
+            </div>
+            
+            <p class="pricing-note">All plans include a 14-day free trial. No credit card required. Cancel anytime. 30-day money back guarantee.</p>
+        </section>
+
         <!-- CTA -->
         <section class="cta-section">
             <h2 class="cta-title">Start Automated Forex Trading Today</h2>
@@ -168,7 +264,7 @@
                         <li><a href="ea-download.html">EA Download</a></li>
                         <li><a href="installation.html">Installation Guide</a></li>
                         <li><a href="broker-setup.html">Broker Setup</a></li>
-                        <li><a href="pricing.html">Pricing Plans</a></li>
+                        <li><a href="#pricing">Pricing Plans</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -206,6 +302,16 @@
                             e.preventDefault();
                             alert('This feature will be available soon! Currently setting up the MT5 bot pages.');
                         }
+                    });
+                });
+
+                // Smooth scroll for pricing link in navigation
+                document.querySelectorAll('a[href="#pricing"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        document.querySelector('#pricing').scrollIntoView({
+                            behavior: 'smooth'
+                        });
                     });
                 });
 
