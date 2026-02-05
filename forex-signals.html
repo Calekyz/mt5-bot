@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en" dir="auto" class="light">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>Forex Trading Signals | MT5 Bot</title>
+        <style>
+            :root { font-size: 62.5%; }
+            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            
+            /* Navigation */
+            .main-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
+            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .nav-menu { display: flex; gap: 40px; align-items: center; }
+            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; position: relative; padding: 5px 0; }
+            .nav-link:hover, .nav-link.active { color: #3b82f6; }
+            .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); border-radius: 2px; }
+            
+            /* Main Content */
+            .main-container { max-width: 1400px; margin: 90px auto 40px; padding: 0 20px; }
+            .page-header { text-align: center; margin-bottom: 50px; }
+            .page-title { font-size: 4.2rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .page-subtitle { font-size: 1.8rem; color: #94a3b8; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+            
+            /* Signal Grid */
+            .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 40px; }
+            
+            /* Signal Card */
+            .signal-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; transition: all 0.3s ease; }
+            .signal-card.buy { border-left: 5px solid #10b981; }
+            .signal-card.sell { border-left: 5px solid #ef4444; }
+            .signal-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+            
+            .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+            .signal-pair { font-size: 2.2rem; font-weight: 700; }
+            .signal-type { padding: 8px 20px; border-radius: 20px; font-size: 1.4rem; font-weight: 600; }
+            .signal-type.buy { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+            .signal-type.sell { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+            
+            .signal-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
+            .signal-detail { text-align: center; }
+            .detail-label { font-size: 1.3rem; color: #94a3b8; margin-bottom: 5px; }
+            .detail-value { font-size: 1.8rem; font-weight: 600; }
+            
+            .signal-strength { margin: 20px 0; }
+            .strength-bar { height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; }
+            .strength-fill { height: 100%; border-radius: 4px; }
+            .strength-fill.high { background: linear-gradient(135deg, #10b981, #059669); }
+            .strength-fill.medium { background: linear-gradient(135deg, #f59e0b, #d97706); }
+            .strength-fill.low { background: linear-gradient(135deg, #ef4444, #dc2626); }
+            
+            .signal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+            .signal-time { font-size: 1.3rem; color: #94a3b8; }
+            
+            /* Time Filters */
+            .time-filters { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
+            .time-filter { padding: 10px 25px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+            .time-filter.active { background: #3b82f6; color: white; }
+            
+            /* Performance Stats */
+            .performance-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
+            .stat-card { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 25px; text-align: center; }
+            .stat-value { font-size: 3.2rem; font-weight: 800; margin-bottom: 10px; }
+            .stat-value.positive { color: #10b981; }
+            .stat-value.negative { color: #ef4444; }
+            .stat-label { font-size: 1.4rem; color: #94a3b8; }
+            
+            /* Alert System */
+            .alert-system { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 30px; margin-top: 50px; border: 1px solid #3b82f6; }
+            .alert-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+            .alert-icon { font-size: 2.4rem; }
+            .alert-title { font-size: 2.4rem; font-weight: 700; }
+            
+            /* Buttons */
+            .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; min-height: 44px; }
+            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border: none; }
+            .btn-primary:hover { transform: translateY(-2px); }
+            .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
+            
+            /* Mobile */
+            @media (max-width: 768px) {
+                .nav-menu { display: none; }
+                .page-title { font-size: 3.2rem; }
+                .signal-grid { grid-template-columns: 1fr; }
+                .signal-card { margin: 0 10px; }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
+                    <a href="forex-signals.html" class="nav-link active">Signals</a>
+                    <a href="ea-download.html" class="nav-link">EA Download</a>
+                    <a href="backtesting.html" class="nav-link">Backtesting</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                </div>
+                <div class="nav-auth">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Get Signals</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1 class="page-title">📡 Live Forex Signals</h1>
+                <p class="page-subtitle">AI-generated trading signals for MetaTrader 5. Real-time buy/sell recommendations with entry, stop loss, and take profit levels.</p>
+            </div>
+
+            <!-- Time Filters -->
+            <div class="time-filters">
+                <div class="time-filter active" onclick="filterSignals('all')">All Signals</div>
+                <div class="time-filter" onclick="filterSignals('today')">Today</div>
+                <div class="time-filter" onclick="filterSignals('1h')">Last Hour</div>
+                <div class="time-filter" onclick="filterSignals('strong')">Strong Signals</div>
+                <div class="time-filter" onclick="filterSignals('active')">Active Trades</div>
+            </div>
+
+            <!-- Signal Grid -->
+            <div class="signal-grid" id="signalContainer">
+                <!-- Signals will be generated here -->
+            </div>
+
+            <!-- Alert System -->
+            <div class="alert-system">
+                <div class="alert-header">
+                    <div class="alert-icon">🔔</div>
+                    <h2 class="alert-title">Signal Alert System</h2>
+                </div>
+                <p style="color: #94a3b8; margin-bottom: 25px; font-size: 1.6rem; line-height: 1.6;">
+                    Get instant notifications when new trading signals are generated. Connect to Telegram, Email, or SMS.
+                </p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="setupTelegramAlerts()">
+                        📱 Telegram Alerts
+                    </button>
+                    <button class="btn btn-success" onclick="setupEmailAlerts()">
+                        📧 Email Alerts
+                    </button>
+                    <button class="btn" style="background: #8b5cf6; color: white;" onclick="setupSMSAlerts()">
+                        💬 SMS Alerts
+                    </button>
+                </div>
+            </div>
+
+            <!-- Performance Stats -->
+            <div class="performance-stats">
+                <div class="stat-card">
+                    <div class="stat-value positive">87.3%</div>
+                    <div class="stat-label">Signal Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value positive">+42.8%</div>
+                    <div class="stat-label">Monthly Profit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Signals This Month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value negative">-12.4%</div>
+                    <div class="stat-label">Max Drawdown</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Sample Signals Data
+            const signals = [
+                {
+                    pair: "EUR/USD",
+                    type: "buy",
+                    entry: "1.08450",
+                    stopLoss: "1.08200",
+                    takeProfit: "1.08800",
+                    timeframe: "M15",
+                    strength: "high",
+                    pips: "35",
+                    time: "2 min ago",
+                    active: true
+                },
+                {
+                    pair: "GBP/JPY",
+                    type: "sell",
+                    entry: "188.420",
+                    stopLoss: "188.850",
+                    takeProfit: "187.900",
+                    timeframe: "H1",
+                    strength: "medium",
+                    pips: "52",
+                    time: "15 min ago",
+                    active: true
+                },
+                {
+                    pair: "USD/CAD",
+                    type: "buy",
+                    entry: "1.35280",
+                    stopLoss: "1.35000",
+                    takeProfit: "1.35800",
+                    timeframe: "M30",
+                    strength: "high",
+                    pips: "52",
+                    time: "45 min ago",
+                    active: true
+                },
+                {
+                    pair: "AUD/USD",
+                    type: "sell",
+                    entry: "0.65820",
+                    stopLoss: "0.66000",
+                    takeProfit: "0.65500",
+                    timeframe: "H4",
+                    strength: "low",
+                    pips: "32",
+                    time: "1 hour ago",
+                    active: false
+                },
+                {
+                    pair: "XAU/USD",
+                    type: "buy",
+                    entry: "2035.40",
+                    stopLoss: "2028.00",
+                    takeProfit: "2050.00",
+                    timeframe: "D1",
+                    strength: "medium",
+                    pips: "146",
+                    time: "2 hours ago",
+                    active: true
+                },
+                {
+                    pair: "USD/JPY",
+                    type: "sell",
+                    entry: "148.150",
+                    stopLoss: "148.500",
+                    takeProfit: "147.600",
+                    timeframe: "M15",
+                    strength: "high",
+                    pips: "55",
+                    time: "3 hours ago",
+                    active: false
+                }
+            ];
+
+            // Generate Signal Card HTML
+            function generateSignalCard(signal) {
+                const strengthWidths = { high: "90%", medium: "65%", low: "40%" };
+                const strengthColors = { high: "high", medium: "medium", low: "low" };
+                
+                return `
+                    <div class="signal-card ${signal.type}" data-strength="${signal.strength}" data-active="${signal.active}">
+                        <div class="signal-header">
+                            <div class="signal-pair">${signal.pair}</div>
+                            <div class="signal-type ${signal.type}">${signal.type.toUpperCase()}</div>
+                        </div>
+                        
+                        <div class="signal-details">
+                            <div class="signal-detail">
+                                <div class="detail-label">Entry Price</div>
+                                <div class="detail-value">${signal.entry}</div>
+                            </div>
+                            <div class="signal-detail">
+                                <div class="detail-label">Stop Loss</div>
+                                <div class="detail-value">${signal.stopLoss}</div>
+                            </div>
+                            <div class="signal-detail">
+                                <div class="detail-label">Take Profit</div>
+                                <div class="detail-value">${signal.takeProfit}</div>
+                            </div>
+                            <div class="signal-detail">
+                                <div class="detail-label">Timeframe</div>
+                                <div class="detail-value">${signal.timeframe}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="signal-strength">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="color: #94a3b8; font-size: 1.3rem;">Signal Strength</span>
+                                <span style="font-weight: 600; text-transform: capitalize;">${signal.strength}</span>
+                            </div>
+                            <div class="strength-bar">
+                                <div class="strength-fill ${strengthColors[signal.strength]}" style="width: ${strengthWidths[signal.strength]}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="signal-footer">
+                            <div>
+                                <div style="font-size: 1.3rem; color: #94a3b8;">Potential Pips</div>
+                                <div style="font-size: 1.8rem; font-weight: 600; color: ${signal.type === 'buy' ? '#10b981' : '#ef4444'}">${signal.pips}</div>
+                            </div>
+                            <div>
+                                <div class="signal-time">${signal.time}</div>
+                                <div style="padding: 4px 12px; background: ${signal.active ? 'rgba(16, 185, 129, 0.2)' : 'rgba(148, 163, 184, 0.2)'}; color: ${signal.active ? '#10b981' : '#94a3b8'}; border-radius: 12px; font-size: 1.2rem; margin-top: 5px;">
+                                    ${signal.active ? 'ACTIVE' : 'CLOSED'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Filter Signals
+            function filterSignals(filter) {
+                const filters = document.querySelectorAll('.time-filter');
+                filters.forEach(f => f.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                let filteredSignals = [...signals];
+                
+                switch(filter) {
+                    case 'today':
+                        filteredSignals = signals.filter(s => s.time.includes('min') || s.time.includes('hour'));
+                        break;
+                    case '1h':
+                        filteredSignals = signals.filter(s => s.time.includes('min') || (s.time.includes('hour') && parseInt(s.time) <= 1));
+                        break;
+                    case 'strong':
+                        filteredSignals = signals.filter(s => s.strength === 'high');
+                        break;
+                    case 'active':
+                        filteredSignals = signals.filter(s => s.active);
+                        break;
+                }
+                
+                const container = document.getElementById('signalContainer');
+                container.innerHTML = filteredSignals.map(generateSignalCard).join('');
+            }
+
+            // Generate New Signal
+            function generateNewSignal() {
+                const pairs = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "USD/CAD", "NZD/USD", "EUR/GBP", "GBP/JPY"];
+                const types = ["buy", "sell"];
+                const timeframes = ["M5", "M15", "M30", "H1", "H4"];
+                const strengths = ["high", "medium", "low"];
+                
+                const newSignal = {
+                    pair: pairs[Math.floor(Math.random() * pairs.length)],
+                    type: types[Math.floor(Math.random() * types.length)],
+                    entry: (1 + Math.random() * 0.5).toFixed(5),
+                    stopLoss: (1 + Math.random() * 0.5).toFixed(5),
+                    takeProfit: (1 + Math.random() * 0.5).toFixed(5),
+                    timeframe: timeframes[Math.floor(Math.random() * timeframes.length)],
+                    strength: strengths[Math.floor(Math.random() * strengths.length)],
+                    pips: Math.floor(Math.random() * 100) + 20,
+                    time: "Just now",
+                    active: true
+                };
+                
+                const container = document.getElementById('signalContainer');
+                container.insertAdjacentHTML('afterbegin', generateSignalCard(newSignal));
+                
+                // Show notification
+                showNotification(`New ${newSignal.type.toUpperCase()} signal: ${newSignal.pair}`);
+            }
+
+            // Alert Setup Functions
+            function setupTelegramAlerts() {
+                alert('Telegram Alert Setup:\n\n1. Join @MT5BotSignals\n2. Click /start\n3. Receive real-time signals\n\nSignals delivered every 5-15 minutes.');
+            }
+
+            function setupEmailAlerts() {
+                alert('Email Alert Setup:\n\nEnter your email to receive daily signal summaries and urgent trade alerts.');
+                const email = prompt('Enter your email address:');
+                if (email) {
+                    alert(`Alerts enabled for: ${email}\nCheck your inbox for confirmation.`);
+                }
+            }
+
+            function setupSMSAlerts() {
+                alert('SMS Alerts (Premium Feature):\n\nReceive urgent signals via SMS. Requires phone verification and premium subscription.');
+            }
+
+            // Show Notification
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: #3b82f6;
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    z-index: 10000;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                    animation: slideIn 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+            }
+
+            // Initialize
+            document.addEventListener('DOMContentLoaded', function() {
+                // Load initial signals
+                const container = document.getElementById('signalContainer');
+                container.innerHTML = signals.map(generateSignalCard).join('');
+                
+                // Simulate new signals every 2-5 minutes
+                setInterval(() => {
+                    if (Math.random() > 0.7) {
+                        generateNewSignal();
+                    }
+                }, 120000 + Math.random() * 180000);
+                
+                // Auto-refresh signals every 30 seconds
+                setInterval(() => {
+                    const cards = document.querySelectorAll('.signal-card');
+                    cards.forEach(card => {
+                        const timeEl = card.querySelector('.signal-time');
+                        if (timeEl) {
+                            const time = timeEl.textContent;
+                            if (time.includes('min')) {
+                                const mins = parseInt(time);
+                                if (!isNaN(mins)) {
+                                    timeEl.textContent = `${mins + 1} min ago`;
+                                }
+                            } else if (time.includes('hour')) {
+                                const hours = parseInt(time);
+                                if (!isNaN(hours)) {
+                                    timeEl.textContent = `${hours + 1} hours ago`;
+                                }
+                            }
+                        }
+                    });
+                }, 60000);
+            });
+        </script>
+    </body>
+</html>
