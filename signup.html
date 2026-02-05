@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - MT5 Forex Trading Bot</title>
+    <style>
+        /* Same styling as main site for consistency */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .signup-container {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid #334155;
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .signup-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .signup-header p {
+            color: #94a3b8;
+            font-size: 16px;
+        }
+        
+        .signup-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .signup-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        
+        .signup-form input,
+        .signup-form select {
+            width: 100%;
+            padding: 14px 16px;
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .signup-form input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .plan-selection {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .plan-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .plan-option:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .plan-option input[type="radio"] {
+            width: auto;
+            margin-right: 12px;
+        }
+        
+        .plan-details {
+            flex-grow: 1;
+        }
+        
+        .plan-name {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        
+        .plan-price {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .terms input[type="checkbox"] {
+            width: auto;
+            margin-right: 12px;
+            margin-top: 4px;
+        }
+        
+        .terms label {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        
+        .terms a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        
+        .signup-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .signup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #94a3b8;
+        }
+        
+        .login-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .signup-container {
+                padding: 25px;
+            }
+            
+            .signup-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <h1>Create Your Account</h1>
+            <p>Start your 7-day free trial of the MT5 Forex Trading Bot</p>
+        </div>
+        
+        <form class="signup-form" id="signupForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="John Smith" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a strong password" minlength="8" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="For Telegram alerts">
+            </div>
+            
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="">Select your country</option>
+                    <option value="US">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="JP">Japan</option>
+                    <option value="SG">Singapore</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Your Plan</label>
+                <div class="plan-selection">
+                    <div class="plan-option">
+                        <input type="radio" id="planStarter" name="plan" value="starter" checked>
+                        <div class="plan-details">
+                            <div class="plan-name">Starter Plan</div>
+                            <div class="plan-price">$29/month after 7-day trial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-option">
+                        <input type="radio" id="planPro" name="plan" value="pro">
+                        <div class="plan-details">
+                            <div class="plan-name">Pro Trader (Most Popular)</div>
+                            <div class="plan-price">$79/month after 7-day trial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-option">
+                        <input type="radio" id="planVIP" name="plan" value="vip">
+                        <div class="plan-details">
+                            <div class="plan-name">VIP Elite</div>
+                            <div class="plan-price">$199/month after 7-day trial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that trading involves risk and past performance doesn't guarantee future results.</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="signup-button">Create Account & Start Free Trial</button>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Log in here</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Form submission handler
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                plan: document.querySelector('input[name="plan"]:checked').value
+            };
+            
+            // In a real application, you would send this data to your server
+            // For demo purposes, we'll just show a success message
+            alert(`Account created successfully!\n\nWelcome ${formData.fullName}!\nYour ${formData.plan} plan trial has started.\nCheck your email (${formData.email}) for setup instructions.`);
+            
+            // Reset form
+            this.reset();
+            
+            // In a real app, you would redirect to dashboard
+            // window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>
