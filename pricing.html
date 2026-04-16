@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="auto">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing | MT5 Trading Bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Simple, transparent pricing for MT5 Bot Pro. Choose the plan that fits your trading goals. All plans include a 14-day free trial.">
+    <title>Pricing | MT5 Trading Bot | Simple & Transparent Plans</title>
     <style>
         * {
             margin: 0;
@@ -11,40 +12,204 @@
             box-sizing: border-box;
         }
 
+        :root { 
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f8fafc;
+            background: linear-gradient(135deg, var(--gray-50) 0%, #ffffff 100%);
             color: #0f172a;
             line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ===== PROFESSIONAL NAVIGATION ===== */
+        .main-nav { 
+            background: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid var(--gray-200); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 1000; 
+        }
+        
+        .nav-container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: 70px; 
+        }
+        
+        .nav-logo a { 
+            font-size: 2rem; 
+            font-weight: 700; 
+            color: var(--gray-900); 
+            text-decoration: none; 
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-logo span { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gray-900);
+            font-size: 2.4rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+        }
+        
+        .nav-menu { 
+            display: flex; 
+            gap: 3rem; 
+            align-items: center; 
+        }
+        
+        .nav-link { 
+            color: var(--gray-600); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 1.5rem; 
+            transition: all 0.2s ease; 
+            position: relative; 
+            padding: 0.5rem 0; 
+        }
+        
+        .nav-link:hover, 
+        .nav-link.active { 
+            color: var(--primary); 
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .nav-auth { 
+            display: flex; 
+            gap: 1.5rem; 
+            align-items: center; 
+        }
+        
+        /* Buttons */
+        .btn { 
+            padding: 0.8rem 2rem; 
+            border-radius: 0.5rem; 
+            font-weight: 500; 
+            font-size: 1.4rem; 
+            text-decoration: none; 
+            transition: all 0.2s ease; 
+            cursor: pointer; 
+            border: none; 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-outline { 
+            background: transparent; 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+        }
+        
+        .btn-outline:hover { 
+            background: var(--primary); 
+            color: white; 
+            transform: translateY(-2px); 
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: white; 
+            border: none; 
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
         }
 
         /* Professional Container */
         .pricing-page {
             max-width: 1280px;
-            margin: 0 auto;
+            margin: 90px auto 0;
             padding: 4rem 2rem;
         }
 
-        /* Header Section - Professional & Clean */
+        /* Header Section */
         .pricing-header {
             text-align: center;
             margin-bottom: 4rem;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .pricing-main-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0f172a;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
         }
 
         .pricing-subtitle {
             font-size: 1.125rem;
-            color: #475569;
+            color: var(--gray-500);
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+        }
+
+        .trust-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
         }
 
         /* Pricing Grid */
@@ -59,32 +224,34 @@
         .pricing-card {
             background: #ffffff;
             border-radius: 1rem;
-            padding: 2rem;
-            transition: all 0.2s ease;
-            border: 1px solid #e2e8f0;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
             position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .pricing-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
-            border-color: #cbd5e1;
+            transform: translateY(-6px);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+            border-color: var(--gray-300);
         }
 
         /* Popular Plan Highlight */
         .pricing-card.popular {
-            border: 2px solid #3b82f6;
-            box-shadow: 0 20px 25px -12px rgba(59, 130, 246, 0.15);
+            border: 2px solid var(--primary);
+            box-shadow: 0 20px 25px -12px rgba(59, 130, 246, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(59, 130, 246, 0.02) 100%);
         }
 
         .popular-badge {
             position: absolute;
             top: -12px;
             left: 1.5rem;
-            background: #3b82f6;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.375rem;
+            padding: 0.35rem 1rem;
+            border-radius: 2rem;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.025em;
@@ -93,40 +260,40 @@
         /* Plan Header */
         .plan-name {
             font-size: 1.5rem;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: 700;
+            color: var(--gray-900);
             margin-bottom: 0.5rem;
         }
 
         .price-amount {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #0f172a;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
             display: inline-block;
             letter-spacing: -0.02em;
         }
 
         .price-period {
             font-size: 0.875rem;
-            color: #64748b;
+            color: var(--gray-500);
             display: inline-block;
             margin-left: 0.25rem;
         }
 
         .price-note {
             font-size: 0.75rem;
-            color: #64748b;
+            color: var(--gray-500);
             margin-top: 0.5rem;
         }
 
         /* Divider */
         .divider {
             height: 1px;
-            background: #e2e8f0;
+            background: var(--gray-200);
             margin: 1.5rem 0;
         }
 
-        /* Features List - Clean & Scannable */
+        /* Features List */
         .plan-features {
             list-style: none;
             margin: 1.5rem 0;
@@ -137,7 +304,7 @@
             padding: 0.625rem 0;
             padding-left: 1.5rem;
             position: relative;
-            color: #334155;
+            color: var(--gray-600);
             font-size: 0.875rem;
         }
 
@@ -145,26 +312,26 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #10b981;
+            color: var(--success);
             font-weight: 600;
             font-size: 0.875rem;
         }
 
         .feature-excluded {
-            color: #94a3b8;
+            color: var(--gray-400);
         }
 
         .feature-excluded::before {
             content: "—";
             position: absolute;
             left: 0;
-            color: #cbd5e1;
+            color: var(--gray-300);
             font-weight: 400;
         }
 
         .feature-highlight {
             font-weight: 600;
-            color: #475569;
+            color: var(--gray-700);
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.025em;
@@ -184,90 +351,65 @@
         .cta-button {
             display: inline-block;
             width: 100%;
-            padding: 0.75rem 1.5rem;
+            padding: 0.875rem 1.5rem;
             text-align: center;
-            background: #0f172a;
+            background: var(--gray-900);
             color: white;
             text-decoration: none;
             border-radius: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.875rem;
             transition: all 0.2s ease;
             border: 1px solid transparent;
         }
 
         .cta-button:hover {
-            background: #1e293b;
-            transform: translateY(-1px);
+            background: var(--gray-800);
+            transform: translateY(-2px);
         }
 
         .cta-button.outline {
             background: transparent;
-            border-color: #cbd5e1;
-            color: #0f172a;
+            border-color: var(--gray-300);
+            color: var(--gray-900);
         }
 
         .cta-button.outline:hover {
-            background: #f8fafc;
-            border-color: #94a3b8;
-            transform: translateY(-1px);
-        }
-
-        /* Footer Section */
-        .pricing-footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .trial-highlight {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #f1f5f9;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            color: #0f172a;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .pricing-note {
-            color: #64748b;
-            font-size: 0.75rem;
+            background: var(--gray-50);
+            border-color: var(--gray-400);
+            transform: translateY(-2px);
         }
 
         /* Enterprise Section */
         .enterprise-section {
             margin-top: 4rem;
-            padding: 2rem;
-            background: #f1f5f9;
+            padding: 2.5rem;
+            background: var(--gray-50);
             border-radius: 1rem;
             text-align: center;
+            border: 1px solid var(--gray-200);
         }
 
         .enterprise-title {
             font-size: 1.25rem;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: 700;
+            color: var(--gray-900);
             margin-bottom: 0.5rem;
         }
 
         .enterprise-text {
-            color: #475569;
+            color: var(--gray-500);
             font-size: 0.875rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .enterprise-button {
             display: inline-block;
             background: transparent;
-            border: 1px solid #cbd5e1;
-            padding: 0.625rem 1.5rem;
+            border: 1px solid var(--gray-300);
+            padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
-            color: #0f172a;
+            color: var(--gray-900);
             text-decoration: none;
             font-size: 0.875rem;
             font-weight: 500;
@@ -276,7 +418,8 @@
 
         .enterprise-button:hover {
             background: white;
-            border-color: #94a3b8;
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         /* Comparison Table */
@@ -287,8 +430,8 @@
         .comparison-title {
             text-align: center;
             font-size: 1.5rem;
-            font-weight: 600;
-            color: #0f172a;
+            font-weight: 700;
+            color: var(--gray-900);
             margin-bottom: 2rem;
         }
 
@@ -296,8 +439,9 @@
             width: 100%;
             background: white;
             border-radius: 1rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--gray-200);
             overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .comparison-table table {
@@ -308,27 +452,69 @@
         .comparison-table th {
             text-align: left;
             padding: 1rem 1.5rem;
-            background: #f8fafc;
+            background: var(--gray-50);
             font-weight: 600;
             font-size: 0.875rem;
-            color: #0f172a;
-            border-bottom: 1px solid #e2e8f0;
+            color: var(--gray-900);
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .comparison-table td {
             padding: 1rem 1.5rem;
             font-size: 0.875rem;
-            color: #334155;
-            border-bottom: 1px solid #e2e8f0;
+            color: var(--gray-600);
+            border-bottom: 1px solid var(--gray-200);
         }
 
         .comparison-table tr:last-child td {
             border-bottom: none;
         }
 
+        .comparison-table tr:hover td {
+            background: var(--gray-50);
+        }
+
         .check-icon {
-            color: #10b981;
+            color: var(--success);
             font-weight: 600;
+        }
+
+        /* Footer Section */
+        .pricing-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .trial-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gray-100);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: var(--gray-900);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-note {
+            color: var(--gray-500);
+            font-size: 0.75rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive Design */
@@ -339,8 +525,35 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--gray-200);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-auth {
+                display: none;
+            }
+
             .pricing-page {
                 padding: 2rem 1rem;
+                margin-top: 70px;
             }
 
             .pricing-grid {
@@ -349,7 +562,7 @@
             }
 
             .pricing-main-title {
-                font-size: 1.875rem;
+                font-size: 2rem;
             }
 
             .pricing-subtitle {
@@ -367,21 +580,72 @@
             .comparison-table table {
                 min-width: 600px;
             }
+
+            .enterprise-section {
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
             .price-amount {
                 font-size: 2.5rem;
             }
+            
+            .pricing-card {
+                padding: 1.5rem;
+            }
+            
+            .pricing-main-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .main-nav, .enterprise-button, .cta-button {
+                display: none;
+            }
+            
+            .pricing-page {
+                margin: 0;
+                padding: 1rem;
+            }
+            
+            .pricing-card {
+                break-inside: avoid;
+                border: 1px solid #ddd;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <div class="nav-menu" id="mobileMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
+                <a href="forex-signals.html" class="nav-link">Signals</a>
+                <a href="ea-download.html" class="nav-link">EA Download</a>
+                <a href="installation.html" class="nav-link">Installation</a>
+                <a href="backtesting.html" class="nav-link">Performance</a>
+                <a href="pricing.html" class="nav-link active">Pricing</a>
+            </div>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="pricing-page">
         <div class="pricing-container">
             <header class="pricing-header">
-                <h1 class="pricing-main-title">Simple, transparent pricing</h1>
-                <p class="pricing-subtitle">Choose the plan that works best for your trading needs. All plans include a 7-day free trial.</p>
+                <div class="trust-badge">💰 SIMPLE & TRANSPARENT</div>
+                <h1 class="pricing-main-title">Choose your trading plan</h1>
+                <p class="pricing-subtitle">Select the perfect plan for your trading goals. All plans include a 14-day free trial.</p>
             </header>
             
             <div class="pricing-grid">
@@ -396,7 +660,7 @@
                         <li class="feature-included">Full MT5 bot access</li>
                         <li class="feature-included">2 currency pairs (EUR/USD, GBP/USD)</li>
                         <li class="feature-included">Basic risk management</li>
-                        <li class="feature-included">Email support</li>
+                        <li class="feature-included">Email support (48h response)</li>
                         <li class="feature-excluded">Telegram signal alerts</li>
                         <li class="feature-excluded">Manual updates only</li>
                     </ul>
@@ -405,7 +669,7 @@
                 
                 <!-- Pro Trader (Popular) -->
                 <div class="pricing-card popular">
-                    <div class="popular-badge">Popular</div>
+                    <div class="popular-badge">⭐ MOST POPULAR</div>
                     <h2 class="plan-name">Pro Trader</h2>
                     <div class="price-amount">$79</div>
                     <div class="price-period">/month</div>
@@ -416,7 +680,7 @@
                         <li class="feature-included">7 major currency pairs</li>
                         <li class="feature-included">Advanced AI algorithms</li>
                         <li class="feature-included">Telegram signal alerts</li>
-                        <li class="feature-included">Priority email & chat support</li>
+                        <li class="feature-included">Priority email & chat support (24h)</li>
                         <li class="feature-included">Automatic strategy updates</li>
                     </ul>
                     <a href="#" class="cta-button">Start free trial →</a>
@@ -443,14 +707,14 @@
             
             <!-- Enterprise Section -->
             <div class="enterprise-section">
-                <h3 class="enterprise-title">Need a custom solution?</h3>
-                <p class="enterprise-text">Enterprise-grade features, volume discounts, and dedicated support for large trading operations.</p>
+                <h3 class="enterprise-title">🏢 Need a custom solution?</h3>
+                <p class="enterprise-text">Enterprise-grade features, volume discounts, and dedicated support for large trading operations and institutions.</p>
                 <a href="#" class="enterprise-button">Contact sales →</a>
             </div>
 
             <!-- Feature Comparison Table -->
             <div class="comparison-section">
-                <h3 class="comparison-title">Compare features across plans</h3>
+                <h3 class="comparison-title">📊 Compare features across plans</h3>
                 <div class="comparison-table">
                     <table>
                         <thead>
@@ -498,6 +762,18 @@
                                 <td>—</td>
                                 <td class="check-icon">✓</td>
                             </tr>
+                            <tr>
+                                <td>Telegram alerts</td>
+                                <td>—</td>
+                                <td class="check-icon">✓</td>
+                                <td class="check-icon">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Auto strategy updates</td>
+                                <td>—</td>
+                                <td class="check-icon">✓</td>
+                                <td class="check-icon">✓</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -505,11 +781,65 @@
 
             <footer class="pricing-footer">
                 <div class="trial-highlight">
-                    <span>✨</span> 7-day free trial on all plans
+                    <span>✨</span> 14-day free trial on all plans
                 </div>
-                <p class="pricing-note">No credit card required. Cancel anytime. All plans include full MT5 bot functionality during trial.</p>
+                <p class="pricing-note">No credit card required. Cancel anytime. All plans include full MT5 bot functionality during trial. 30-day money-back guarantee.</p>
             </footer>
         </div>
     </div>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                if (menu) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add click tracking for plan selection
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const card = this.closest('.pricing-card');
+                const planName = card.querySelector('.plan-name')?.textContent || 'Unknown';
+                console.log(`Selected plan: ${planName}`);
+                // You can add Google Analytics or other tracking here
+                alert(`🎯 You selected the ${planName} plan!\n\nStart your 14-day free trial now. No credit card required.`);
+            });
+        });
+        
+        // Enterprise button tracking
+        document.querySelector('.enterprise-button')?.addEventListener('click', function(e) {
+            console.log('Enterprise sales inquiry');
+            alert('📞 Contact our sales team:\n\nEmail: sales@mt5bot.com\nPhone: +1 (888) 123-4567\n\nWe will respond within 24 hours.');
+        });
+    </script>
 </body>
 </html>
