@@ -1,92 +1,680 @@
-<!doctype html>
-<html lang="en" dir="auto" class="light">
+<!DOCTYPE html>
+<html lang="en" dir="auto">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="title" content="MT5 Forex Trading Bot | Automated Expert Advisor" />
-        <meta name="description" content="Professional MT5 Expert Advisor for automated forex trading. AI-powered signals, risk management, and 24/7 trading." />
-        <title>MT5 Forex Trading Bot | Automated Trading</title>
+        <meta name="title" content="MT5 Forex Trading Bot | Professional Automated Expert Advisor" />
+        <meta name="description" content="Professional MT5 Expert Advisor for automated forex trading. AI-powered signals, advanced risk management, and 24/7 trading with 87.3% win rate." />
+        <meta name="keywords" content="MT5, Forex Trading Bot, Expert Advisor, Automated Trading, MetaTrader 5, EA Trading" />
+        <title>MT5 Forex Trading Bot | Professional Automated Trading EA</title>
         <style>
-            :root { font-size: 62.5%; }
-            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root { 
+                font-size: 62.5%; 
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --secondary: #8b5cf6;
+                --success: #10b981;
+                --warning: #f59e0b;
+                --danger: #ef4444;
+                --gray-50: #f8fafc;
+                --gray-100: #f1f5f9;
+                --gray-200: #e2e8f0;
+                --gray-300: #cbd5e1;
+                --gray-400: #94a3b8;
+                --gray-500: #64748b;
+                --gray-600: #475569;
+                --gray-700: #334155;
+                --gray-800: #1e293b;
+                --gray-900: #0f172a;
+            }
             
-            /* Navigation */
-            .main-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
-            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .nav-menu { display: flex; gap: 40px; align-items: center; }
-            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; }
-            .nav-link:hover, .nav-link.active { color: #3b82f6; }
+            body { 
+                margin: 0; 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+                background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+                color: white; 
+                min-height: 100vh;
+            }
             
-            /* Hero Section */
-            .hero-section { padding: 150px 0 100px; text-align: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-            .hero-title { font-size: 4.8rem; font-weight: 800; margin-bottom: 30px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .hero-subtitle { font-size: 2rem; color: #94a3b8; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; }
+            /* ===== PROFESSIONAL NAVIGATION - FIXED MOBILE ===== */
+            .main-nav { 
+                background: rgba(15, 23, 42, 0.98); 
+                backdrop-filter: blur(10px); 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                right: 0; 
+                z-index: 1000; 
+            }
+            
+            .nav-container { 
+                max-width: 1400px; 
+                margin: 0 auto; 
+                padding: 0 2rem; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between; 
+                height: 70px; 
+            }
+            
+            .nav-logo a { 
+                font-size: 2rem; 
+                font-weight: 700; 
+                color: white; 
+                text-decoration: none; 
+                letter-spacing: -0.02em;
+            }
+            
+            .nav-logo span { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+            }
+            
+            /* Mobile Menu Button */
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2.4rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                width: 44px;
+                height: 44px;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+                z-index: 1001;
+            }
+            
+            .mobile-menu-btn:hover {
+                color: var(--primary);
+            }
+            
+            .nav-menu { 
+                display: flex; 
+                gap: 2.5rem; 
+                align-items: center; 
+            }
+            
+            .nav-link { 
+                color: var(--gray-400); 
+                text-decoration: none; 
+                font-weight: 500; 
+                font-size: 1.5rem; 
+                transition: all 0.2s ease; 
+                position: relative; 
+                padding: 0.5rem 0; 
+            }
+            
+            .nav-link:hover, 
+            .nav-link.active { 
+                color: var(--primary); 
+            }
+            
+            .nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--primary);
+                border-radius: 2px;
+            }
+            
+            .nav-auth { 
+                display: flex; 
+                gap: 1.5rem; 
+                align-items: center; 
+            }
             
             /* Buttons */
-            .btn { padding: 15px 40px; border-radius: 10px; font-weight: 600; font-size: 1.8rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; display: inline-block; }
-            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; }
-            .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
-            .btn-outline { background: transparent; color: #3b82f6; border: 2px solid #3b82f6; }
-            .btn-outline:hover { background: #3b82f6; color: white; }
+            .btn { 
+                padding: 0.8rem 2rem; 
+                border-radius: 0.5rem; 
+                font-weight: 500; 
+                font-size: 1.4rem; 
+                text-decoration: none; 
+                transition: all 0.2s ease; 
+                cursor: pointer; 
+                border: none; 
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
             
-            /* Features */
-            .features-section { padding: 100px 0; background: rgba(30, 41, 59, 0.5); }
-            .section-title { text-align: center; font-size: 3.6rem; margin-bottom: 60px; color: white; }
-            .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 0 20px; }
-            .feature-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-            .feature-card:hover { transform: translateY(-10px); border-color: #3b82f6; }
-            .feature-icon { font-size: 4rem; margin-bottom: 25px; }
-            .feature-title { font-size: 2.4rem; margin-bottom: 20px; color: white; }
-            .feature-description { color: #94a3b8; line-height: 1.6; font-size: 1.6rem; }
+            .btn-outline { 
+                background: transparent; 
+                color: var(--primary); 
+                border: 2px solid var(--primary); 
+            }
+            
+            .btn-outline:hover { 
+                background: var(--primary); 
+                color: white; 
+                transform: translateY(-2px); 
+            }
+            
+            .btn-primary { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                color: white; 
+                border: none; 
+            }
+            
+            .btn-primary:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
+            }
+            
+            .btn-large {
+                padding: 1.2rem 3rem;
+                font-size: 1.6rem;
+            }
+            
+            /* Hero Section */
+            .hero-section { 
+                padding: 150px 2rem 100px; 
+                text-align: center; 
+                background: radial-gradient(ellipse at top, var(--gray-800) 0%, var(--gray-900) 100%);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            }
+            
+            .hero-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 1;
+            }
+            
+            .hero-title { 
+                font-size: 5.2rem; 
+                font-weight: 800; 
+                margin-bottom: 2rem; 
+                background: linear-gradient(135deg, #fff 0%, var(--gray-300) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle { 
+                font-size: 1.8rem; 
+                color: var(--gray-400); 
+                max-width: 800px; 
+                margin: 0 auto 3rem; 
+                line-height: 1.6; 
+            }
+            
+            .hero-buttons {
+                display: flex;
+                gap: 2rem;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 3rem;
+            }
+            
+            /* Features Section */
+            .features-section { 
+                padding: 8rem 2rem; 
+                background: rgba(30, 41, 59, 0.3);
+                position: relative;
+            }
+            
+            .section-title { 
+                text-align: center; 
+                font-size: 3.6rem; 
+                margin-bottom: 1.5rem; 
+                color: white; 
+                font-weight: 700;
+                letter-spacing: -0.02em;
+            }
+            
+            .section-subtitle {
+                text-align: center;
+                color: var(--gray-400);
+                font-size: 1.6rem;
+                max-width: 600px;
+                margin: 0 auto 5rem;
+                line-height: 1.6;
+            }
+            
+            .features-grid { 
+                max-width: 1200px; 
+                margin: 0 auto; 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+                gap: 3rem; 
+            }
+            
+            .feature-card { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 3rem; 
+                text-align: center; 
+                border: 1px solid var(--gray-700); 
+                transition: all 0.3s ease; 
+            }
+            
+            .feature-card:hover { 
+                transform: translateY(-5px); 
+                border-color: var(--primary); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .feature-icon { 
+                font-size: 4rem; 
+                margin-bottom: 2rem; 
+            }
+            
+            .feature-title { 
+                font-size: 2rem; 
+                margin-bottom: 1.5rem; 
+                color: white; 
+                font-weight: 600;
+            }
+            
+            .feature-description { 
+                color: var(--gray-400); 
+                line-height: 1.6; 
+                font-size: 1.4rem; 
+            }
             
             /* Pricing Section */
-            .pricing-section { padding: 100px 0; background: #0f172a; }
-            .pricing-title { text-align: center; font-size: 3.6rem; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-            .pricing-subtitle { text-align: center; color: #94a3b8; font-size: 1.8rem; max-width: 600px; margin: 0 auto 60px; line-height: 1.6; }
-            .pricing-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; padding: 0 20px; }
-            .pricing-card { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; position: relative; }
-            .pricing-card:hover { transform: translateY(-10px); border-color: #3b82f6; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
-            .pricing-card.popular { border: 2px solid #3b82f6; transform: scale(1.05); background: rgba(59, 130, 246, 0.05); }
-            .pricing-card.popular:hover { transform: scale(1.05) translateY(-10px); }
-            .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 8px 25px; border-radius: 20px; font-size: 1.4rem; font-weight: 600; }
-            .plan-header { margin-bottom: 30px; }
-            .plan-name { font-size: 2.4rem; margin-bottom: 15px; color: white; font-weight: 600; }
-            .price { font-size: 5.6rem; font-weight: 800; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
-            .price-period { color: #94a3b8; font-size: 1.6rem; margin-bottom: 30px; }
-            .plan-features { list-style: none; padding: 0; margin: 0 0 40px; text-align: left; }
-            .plan-features li { color: #cbd5e1; margin-bottom: 15px; font-size: 1.6rem; padding-left: 25px; position: relative; }
-            .plan-features li:before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
-            .plan-features li.disabled { color: #64748b; }
-            .plan-features li.disabled:before { content: "✗"; color: #ef4444; }
-            .pricing-note { text-align: center; color: #64748b; font-size: 1.4rem; margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+            .pricing-section { 
+                padding: 8rem 2rem; 
+                background: var(--gray-900);
+                position: relative;
+            }
             
-            /* CTA */
-            .cta-section { padding: 100px 0; text-align: center; }
-            .cta-title { font-size: 3.6rem; margin-bottom: 30px; color: white; }
+            .pricing-title { 
+                text-align: center; 
+                font-size: 3.6rem; 
+                margin-bottom: 1.5rem; 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                font-weight: 800; 
+            }
+            
+            .pricing-subtitle { 
+                text-align: center; 
+                color: var(--gray-400); 
+                font-size: 1.6rem; 
+                max-width: 600px; 
+                margin: 0 auto 5rem; 
+                line-height: 1.6; 
+            }
+            
+            .pricing-grid { 
+                max-width: 1200px; 
+                margin: 0 auto; 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+                gap: 3rem; 
+            }
+            
+            .pricing-card { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 3rem; 
+                text-align: center; 
+                border: 1px solid var(--gray-700); 
+                transition: all 0.3s ease; 
+                position: relative; 
+            }
+            
+            .pricing-card:hover { 
+                transform: translateY(-5px); 
+                border-color: var(--primary); 
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); 
+            }
+            
+            .pricing-card.popular { 
+                border: 2px solid var(--primary); 
+                transform: scale(1.02);
+                background: linear-gradient(135deg, var(--gray-800) 0%, rgba(59, 130, 246, 0.05) 100%);
+            }
+            
+            .pricing-card.popular:hover { 
+                transform: scale(1.02) translateY(-5px); 
+            }
+            
+            .popular-badge { 
+                position: absolute; 
+                top: -12px; 
+                left: 50%; 
+                transform: translateX(-50%); 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                color: white; 
+                padding: 0.6rem 1.8rem; 
+                border-radius: 2rem; 
+                font-size: 1.2rem; 
+                font-weight: 600; 
+                white-space: nowrap;
+            }
+            
+            .plan-header { 
+                margin-bottom: 2rem; 
+            }
+            
+            .plan-name { 
+                font-size: 2.4rem; 
+                margin-bottom: 1rem; 
+                color: white; 
+                font-weight: 600; 
+            }
+            
+            .price { 
+                font-size: 4.8rem; 
+                font-weight: 800; 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                margin-bottom: 0.5rem; 
+            }
+            
+            .price-period { 
+                color: var(--gray-400); 
+                font-size: 1.4rem; 
+                margin-bottom: 2rem; 
+            }
+            
+            .plan-features { 
+                list-style: none; 
+                padding: 0; 
+                margin: 0 0 3rem; 
+                text-align: left; 
+            }
+            
+            .plan-features li { 
+                color: var(--gray-300); 
+                margin-bottom: 1.2rem; 
+                font-size: 1.4rem; 
+                padding-left: 2.5rem; 
+                position: relative; 
+                line-height: 1.5;
+            }
+            
+            .plan-features li:before { 
+                content: "✓"; 
+                position: absolute; 
+                left: 0; 
+                color: var(--success); 
+                font-weight: bold; 
+            }
+            
+            .plan-features li.disabled { 
+                color: var(--gray-500); 
+            }
+            
+            .plan-features li.disabled:before { 
+                content: "✗"; 
+                color: var(--danger); 
+            }
+            
+            .plan-features li strong {
+                color: white;
+            }
+            
+            .pricing-note { 
+                text-align: center; 
+                color: var(--gray-500); 
+                font-size: 1.3rem; 
+                margin-top: 4rem; 
+                max-width: 600px; 
+                margin-left: auto; 
+                margin-right: auto; 
+            }
+            
+            /* CTA Section */
+            .cta-section { 
+                padding: 8rem 2rem; 
+                text-align: center; 
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            }
+            
+            .cta-title { 
+                font-size: 3.6rem; 
+                margin-bottom: 1.5rem; 
+                color: white; 
+                font-weight: 700;
+            }
+            
+            .cta-subtitle {
+                color: var(--gray-400);
+                font-size: 1.6rem;
+                max-width: 600px;
+                margin: 0 auto 3rem;
+                line-height: 1.6;
+            }
             
             /* Footer */
-            .main-footer { background: #0f172a; border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 60px 20px 30px; }
-            .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-            .footer-column h3 { color: white; margin-bottom: 25px; font-size: 2rem; }
-            .footer-links { list-style: none; padding: 0; }
-            .footer-links li { margin-bottom: 15px; }
-            .footer-links a { color: #94a3b8; text-decoration: none; font-size: 1.6rem; transition: color 0.3s; }
-            .footer-links a:hover { color: #3b82f6; }
-            .copyright { text-align: center; margin-top: 60px; color: #64748b; font-size: 1.4rem; }
+            .main-footer { 
+                background: var(--gray-900); 
+                border-top: 1px solid var(--gray-800); 
+                padding: 6rem 2rem 3rem; 
+            }
+            
+            .footer-container { 
+                max-width: 1200px; 
+                margin: 0 auto; 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+                gap: 4rem; 
+            }
+            
+            .footer-column h3 { 
+                color: white; 
+                margin-bottom: 2rem; 
+                font-size: 1.8rem; 
+                font-weight: 600;
+            }
+            
+            .footer-description {
+                color: var(--gray-400);
+                font-size: 1.4rem;
+                line-height: 1.6;
+            }
+            
+            .footer-links { 
+                list-style: none; 
+                padding: 0; 
+            }
+            
+            .footer-links li { 
+                margin-bottom: 1.2rem; 
+            }
+            
+            .footer-links a { 
+                color: var(--gray-400); 
+                text-decoration: none; 
+                font-size: 1.4rem; 
+                transition: color 0.2s; 
+            }
+            
+            .footer-links a:hover { 
+                color: var(--primary); 
+            }
+            
+            .copyright { 
+                text-align: center; 
+                margin-top: 6rem; 
+                padding-top: 3rem; 
+                border-top: 1px solid var(--gray-800); 
+                color: var(--gray-500); 
+                font-size: 1.2rem; 
+                line-height: 1.6;
+            }
+            
+            /* Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .feature-card, .pricing-card {
+                animation: fadeInUp 0.6s ease-out;
+                animation-fill-mode: both;
+            }
+            
+            .feature-card:nth-child(1) { animation-delay: 0.1s; }
+            .feature-card:nth-child(2) { animation-delay: 0.2s; }
+            .feature-card:nth-child(3) { animation-delay: 0.3s; }
+            .feature-card:nth-child(4) { animation-delay: 0.4s; }
+            .feature-card:nth-child(5) { animation-delay: 0.5s; }
+            .feature-card:nth-child(6) { animation-delay: 0.6s; }
             
             /* Responsive */
+            @media (max-width: 1024px) {
+                .nav-menu {
+                    gap: 1.5rem;
+                }
+            }
+            
             @media (max-width: 768px) {
-                .nav-menu { display: none; }
-                .hero-title { font-size: 3.2rem; }
-                .hero-subtitle { font-size: 1.6rem; }
-                .features-grid { grid-template-columns: 1fr; }
-                .pricing-grid { grid-template-columns: 1fr; }
-                .pricing-card.popular { transform: none; }
-                .pricing-card.popular:hover { transform: translateY(-10px); }
-                .btn { width: 100%; margin-bottom: 15px; }
+                .mobile-menu-btn {
+                    display: flex;
+                }
+                
+                .nav-menu {
+                    display: none;
+                    position: absolute;
+                    top: 70px;
+                    left: 0;
+                    right: 0;
+                    background: var(--gray-800);
+                    flex-direction: column;
+                    padding: 2rem;
+                    gap: 1.5rem;
+                    border-bottom: 1px solid var(--gray-700);
+                    max-height: calc(100vh - 70px);
+                    overflow-y: auto;
+                }
+                
+                .nav-menu.active {
+                    display: flex;
+                }
+                
+                .nav-auth {
+                    display: none;
+                }
+                
+                .hero-title { 
+                    font-size: 3.2rem; 
+                }
+                
+                .hero-subtitle { 
+                    font-size: 1.6rem; 
+                }
+                
+                .hero-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .hero-buttons .btn {
+                    width: auto;
+                    min-width: 200px;
+                }
+                
+                .section-title { 
+                    font-size: 2.8rem; 
+                }
+                
+                .features-grid { 
+                    grid-template-columns: 1fr; 
+                }
+                
+                .pricing-grid { 
+                    grid-template-columns: 1fr; 
+                    max-width: 400px;
+                }
+                
+                .pricing-card.popular { 
+                    transform: none; 
+                }
+                
+                .pricing-card.popular:hover { 
+                    transform: translateY(-5px); 
+                }
+                
+                .footer-container {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .hero-title { 
+                    font-size: 2.4rem; 
+                }
+                
+                .hero-subtitle { 
+                    font-size: 1.4rem; 
+                }
+                
+                .section-title { 
+                    font-size: 2.2rem; 
+                }
+                
+                .pricing-title {
+                    font-size: 2.2rem;
+                }
+                
+                .cta-title {
+                    font-size: 2.2rem;
+                }
+                
+                .price { 
+                    font-size: 3.6rem; 
+                }
+                
+                .plan-name { 
+                    font-size: 2rem; 
+                }
+                
+                .popular-badge {
+                    font-size: 1rem;
+                    padding: 0.4rem 1.2rem;
+                }
+            }
+            
+            /* Print Styles */
+            @media print {
+                .main-nav, .hero-buttons, .cta-section .btn, .footer-links {
+                    display: none;
+                }
+                
+                .hero-section, .features-section, .pricing-section {
+                    break-inside: avoid;
+                }
             }
         </style>
     </head>
@@ -95,7 +683,8 @@
         <nav class="main-nav">
             <div class="nav-container">
                 <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
-                <div class="nav-menu">
+                <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+                <div class="nav-menu" id="mobileMenu">
                     <a href="index.html" class="nav-link active">Home</a>
                     <a href="mt5-bot.html" class="nav-link">Trading Dashboard</a>
                     <a href="forex-signals.html" class="nav-link">Live Signals</a>
@@ -117,20 +706,21 @@
             <div class="hero-container">
                 <h1 class="hero-title">🚀 Automated MT5 Forex Trading Bot</h1>
                 <p class="hero-subtitle">Professional Expert Advisor for MetaTrader 5. Trade forex 24/7 with AI-powered signals, advanced risk management, and proven 87.3% win rate.</p>
-                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
-                    <a href="ea-download.html" class="btn btn-primary">
+                <div class="hero-buttons">
+                    <a href="ea-download.html" class="btn btn-primary btn-large">
                         ⬇ Download EA Now
                     </a>
-                    <a href="#pricing" class="btn btn-outline">
+                    <a href="#pricing" class="btn btn-outline btn-large">
                         💰 View Pricing Plans
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Features -->
+        <!-- Features Section -->
         <section class="features-section">
             <h2 class="section-title">🔥 Why Choose Our MT5 Bot</h2>
+            <p class="section-subtitle">Experience the future of automated trading with cutting-edge technology</p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
@@ -165,7 +755,7 @@
             </div>
         </section>
 
-        <!-- PRICING SECTION (NEWLY ADDED) -->
+        <!-- PRICING SECTION -->
         <section class="pricing-section" id="pricing">
             <h2 class="pricing-title">💰 Simple & Transparent Pricing</h2>
             <p class="pricing-subtitle">Choose the plan that fits your trading goals. All plans include a 14-day free trial.</p>
@@ -186,14 +776,14 @@
                         <li class="disabled">Telegram Signal Alerts</li>
                         <li class="disabled">Auto Strategy Updates</li>
                     </ul>
-                    <a href="signup.html?plan=starter" class="btn btn-outline" style="width: 100%; padding: 18px;">
+                    <a href="signup.html?plan=starter" class="btn btn-outline" style="width: 100%; justify-content: center;">
                         Start Free Trial
                     </a>
                 </div>
                 
                 <!-- Pro Plan (Popular) -->
                 <div class="pricing-card popular">
-                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="popular-badge">⭐ MOST POPULAR</div>
                     <div class="plan-header">
                         <h3 class="plan-name">Pro Trader</h3>
                         <div class="price">$79</div>
@@ -207,7 +797,7 @@
                         <li>Priority Email & Chat Support</li>
                         <li>Auto Strategy Updates</li>
                     </ul>
-                    <a href="signup.html?plan=pro" class="btn btn-primary" style="width: 100%; padding: 18px;">
+                    <a href="signup.html?plan=pro" class="btn btn-primary" style="width: 100%; justify-content: center;">
                         Start Free Trial
                     </a>
                 </div>
@@ -227,28 +817,28 @@
                         <li>Dedicated Account Manager</li>
                         <li>Weekly Performance Reports</li>
                     </ul>
-                    <a href="signup.html?plan=vip" class="btn btn-outline" style="width: 100%; padding: 18px;">
+                    <a href="signup.html?plan=vip" class="btn btn-outline" style="width: 100%; justify-content: center;">
                         Start Free Trial
                     </a>
                 </div>
             </div>
             
-            <p class="pricing-note">All plans include a 14-day free trial. No credit card required. Cancel anytime. 30-day money back guarantee.</p>
+            <p class="pricing-note">✨ All plans include a 14-day free trial. No credit card required. Cancel anytime. 30-day money back guarantee.</p>
         </section>
 
-        <!-- CTA -->
+        <!-- CTA Section -->
         <section class="cta-section">
             <h2 class="cta-title">Start Automated Forex Trading Today</h2>
-            <p style="color: #94a3b8; font-size: 1.8rem; max-width: 800px; margin: 0 auto 40px;">Join thousands of successful traders using our MT5 Expert Advisor. No coding required - just install and start trading.</p>
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="signup.html" class="btn btn-primary" style="padding: 20px 50px;">
+            <p class="cta-subtitle">Join thousands of successful traders using our MT5 Expert Advisor. No coding required - just install and start trading.</p>
+            <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                <a href="signup.html" class="btn btn-primary btn-large">
                     ✨ Start 14-Day Free Trial
                 </a>
-                <a href="backtesting.html" class="btn btn-outline" style="padding: 20px 50px;">
+                <a href="backtesting.html" class="btn btn-outline btn-large">
                     📊 View Performance Results
                 </a>
             </div>
-            <p style="color: #64748b; margin-top: 30px; font-size: 1.4rem;">No credit card required for free trial</p>
+            <p style="color: var(--gray-500); margin-top: 2rem; font-size: 1.3rem;">No credit card required for free trial</p>
         </section>
 
         <!-- Footer -->
@@ -256,7 +846,7 @@
             <div class="footer-container">
                 <div class="footer-column">
                     <h3>MT5 Bot Pro</h3>
-                    <p style="color: #94a3b8; font-size: 1.6rem; line-height: 1.6;">Professional Expert Advisor for MetaTrader 5. Automated forex trading made simple and profitable.</p>
+                    <p class="footer-description">Professional Expert Advisor for MetaTrader 5. Automated forex trading made simple and profitable.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
@@ -287,37 +877,89 @@
                 </div>
             </div>
             <div class="copyright">
-                © 2024 MT5 Bot Pro. All rights reserved. MetaTrader 5 is a trademark of MetaQuotes Software Corp.
-                <br>Forex trading involves risk and may not be suitable for all investors.
+                © 2025 MT5 Bot Pro. All rights reserved. MetaTrader 5 is a trademark of MetaQuotes Software Corp.
+                <br>Forex trading involves substantial risk of loss and may not be suitable for all investors.
             </div>
         </footer>
 
         <script>
-            // Simple script for button interactions
-            document.addEventListener('DOMContentLoaded', function() {
-                // Add click effects to buttons
-                document.querySelectorAll('.btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        if (this.getAttribute('href') === '#') {
-                            e.preventDefault();
-                            alert('This feature will be available soon! Currently setting up the MT5 bot pages.');
-                        }
-                    });
+            // Toggle Mobile Menu
+            function toggleMenu() {
+                const menu = document.getElementById('mobileMenu');
+                if (menu) {
+                    menu.classList.toggle('active');
+                }
+            }
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    const menu = document.getElementById('mobileMenu');
+                    if (menu) {
+                        menu.classList.remove('active');
+                    }
                 });
-
-                // Smooth scroll for pricing link in navigation
-                document.querySelectorAll('a[href="#pricing"]').forEach(link => {
-                    link.addEventListener('click', function(e) {
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
                         e.preventDefault();
-                        document.querySelector('#pricing').scrollIntoView({
-                            behavior: 'smooth'
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
-                    });
+                        
+                        // Close mobile menu if open
+                        const menu = document.getElementById('mobileMenu');
+                        if (menu) {
+                            menu.classList.remove('active');
+                        }
+                    }
                 });
-
-                // Update copyright year
-                document.querySelector('.copyright').innerHTML = 
-                    document.querySelector('.copyright').innerHTML.replace('2024', new Date().getFullYear());
+            });
+            
+            // Add animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe feature cards for scroll animation
+            document.querySelectorAll('.feature-card, .pricing-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+            
+            // Update copyright year
+            const copyrightElement = document.querySelector('.copyright');
+            if (copyrightElement) {
+                copyrightElement.innerHTML = copyrightElement.innerHTML.replace('2025', new Date().getFullYear());
+            }
+            
+            // Add click tracking for buttons (optional analytics)
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const buttonText = this.textContent.trim();
+                    console.log(`Button clicked: ${buttonText}`);
+                    // You can add Google Analytics or other tracking here
+                });
             });
         </script>
     </body>
