@@ -1,110 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="auto">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - MT5 Forex Trading Bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Create your MT5 Bot Pro account. Start your 14-day free trial and begin automated forex trading with our professional Expert Advisor.">
+    <title>Create Account | MT5 Forex Trading Bot | Start Free Trial</title>
     <style>
-        /* Same styling as main site for consistency */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        :root { 
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            color: var(--gray-100);
+            min-height: 100vh;
+        }
+
+        /* ===== PROFESSIONAL NAVIGATION ===== */
+        .main-nav { 
+            background: rgba(15, 23, 42, 0.98); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 1000; 
         }
         
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
+        .nav-container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 2rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: 70px; 
+        }
+        
+        .nav-logo a { 
+            font-size: 2rem; 
+            font-weight: 700; 
+            color: white; 
+            text-decoration: none; 
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-logo span { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.4rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+        }
+        
+        .nav-menu { 
+            display: flex; 
+            gap: 3rem; 
+            align-items: center; 
+        }
+        
+        .nav-link { 
+            color: var(--gray-400); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 1.5rem; 
+            transition: all 0.2s ease; 
+            position: relative; 
+            padding: 0.5rem 0; 
+        }
+        
+        .nav-link:hover, 
+        .nav-link.active { 
+            color: var(--primary); 
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .nav-auth { 
+            display: flex; 
+            gap: 1.5rem; 
+            align-items: center; 
+        }
+        
+        /* Buttons */
+        .btn { 
+            padding: 0.8rem 2rem; 
+            border-radius: 0.5rem; 
+            font-weight: 500; 
+            font-size: 1.4rem; 
+            text-decoration: none; 
+            transition: all 0.2s ease; 
+            cursor: pointer; 
+            border: none; 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-outline { 
+            background: transparent; 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+        }
+        
+        .btn-outline:hover { 
+            background: var(--primary); 
+            color: white; 
+            transform: translateY(-2px); 
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+            color: white; 
+            border: none; 
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
+        }
+
+        /* Signup Container */
+        .signup-wrapper {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 90px 2rem 2rem;
         }
         
         .signup-container {
-            background: rgba(30, 41, 59, 0.9);
-            border-radius: 16px;
-            padding: 40px;
+            background: var(--gray-800);
+            border-radius: 1.5rem;
+            padding: 3rem;
             width: 100%;
-            max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #334155;
+            max-width: 550px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--gray-700);
+            animation: fadeInUp 0.6s ease-out;
         }
         
         .signup-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
         
         .signup-header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, #fff 0%, var(--gray-300) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            font-weight: 700;
+        }
+        
+        .trial-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 1.2rem;
+            color: var(--success);
+            margin-bottom: 1rem;
         }
         
         .signup-header p {
-            color: #94a3b8;
-            font-size: 16px;
+            color: var(--gray-400);
+            font-size: 1rem;
         }
         
+        /* Form Styles */
         .signup-form .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
         .signup-form label {
             display: block;
-            margin-bottom: 8px;
-            color: #cbd5e1;
+            margin-bottom: 0.6rem;
+            color: var(--gray-300);
             font-weight: 500;
+            font-size: 0.9rem;
         }
         
         .signup-form input,
         .signup-form select {
             width: 100%;
-            padding: 14px 16px;
-            background: #1e293b;
-            border: 1px solid #475569;
-            border-radius: 8px;
-            color: #e2e8f0;
-            font-size: 16px;
-            transition: all 0.3s;
+            padding: 0.9rem 1rem;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.2s ease;
         }
         
-        .signup-form input:focus {
+        .signup-form input:focus,
+        .signup-form select:focus {
             outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
+        .signup-form input::placeholder {
+            color: var(--gray-600);
+        }
+        
+        /* Plan Selection */
         .plan-selection {
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 25px;
+            background: var(--gray-900);
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-700);
         }
         
         .plan-option {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 1rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.2s ease;
+            margin-bottom: 0.25rem;
+        }
+        
+        .plan-option:last-child {
+            margin-bottom: 0;
         }
         
         .plan-option:hover {
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .plan-option.selected {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
         
         .plan-option input[type="radio"] {
-            width: auto;
-            margin-right: 12px;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 1rem;
+            accent-color: var(--primary);
         }
         
         .plan-details {
@@ -113,191 +301,448 @@
         
         .plan-name {
             font-weight: 600;
-            color: #e2e8f0;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
         }
         
         .plan-price {
-            color: #3b82f6;
-            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 500;
         }
         
+        .plan-features {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 0.2rem;
+        }
+        
+        .popular-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* Terms */
         .terms {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 25px;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
         
         .terms input[type="checkbox"] {
-            width: auto;
-            margin-right: 12px;
-            margin-top: 4px;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-top: 0.2rem;
+            accent-color: var(--primary);
         }
         
         .terms label {
             margin-bottom: 0;
-            font-size: 14px;
-            color: #94a3b8;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            line-height: 1.5;
         }
         
         .terms a {
-            color: #3b82f6;
+            color: var(--primary);
             text-decoration: none;
         }
         
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Submit Button */
         .signup-button {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             color: white;
-            font-size: 18px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.2s ease;
         }
         
         .signup-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
         
+        .signup-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Login Link */
         .login-link {
             text-align: center;
-            margin-top: 25px;
-            color: #94a3b8;
+            margin-top: 1.5rem;
+            color: var(--gray-400);
+            font-size: 0.9rem;
         }
         
         .login-link a {
-            color: #3b82f6;
+            color: var(--primary);
             text-decoration: none;
             font-weight: 600;
         }
         
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Security Note */
+        .security-note {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-700);
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--gray-800);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--gray-700);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-auth {
+                display: none;
+            }
+            
+            .signup-wrapper {
+                padding: 80px 1rem 2rem;
+            }
+            
             .signup-container {
-                padding: 25px;
+                padding: 2rem;
             }
             
             .signup-header h1 {
-                font-size: 28px;
+                font-size: 2rem;
+            }
+            
+            .plan-option {
+                flex-wrap: wrap;
+            }
+            
+            .plan-details {
+                width: calc(100% - 2rem);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .signup-container {
+                padding: 1.5rem;
+            }
+            
+            .signup-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .plan-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .plan-option input[type="radio"] {
+                margin-bottom: 0.5rem;
+            }
+            
+            .plan-details {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="signup-container">
-        <div class="signup-header">
-            <h1>Create Your Account</h1>
-            <p>Start your 7-day free trial of the MT5 Forex Trading Bot</p>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <div class="nav-menu" id="mobileMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
+                <a href="forex-signals.html" class="nav-link">Signals</a>
+                <a href="ea-download.html" class="nav-link">EA Download</a>
+                <a href="installation.html" class="nav-link">Installation</a>
+                <a href="backtesting.html" class="nav-link">Performance</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+            </div>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="signup.html" class="btn btn-primary active">Sign Up</a>
+            </div>
         </div>
-        
-        <form class="signup-form" id="signupForm">
-            <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="John Smith" required>
+    </nav>
+
+    <div class="signup-wrapper">
+        <div class="signup-container">
+            <div class="signup-header">
+                <div class="trial-badge">✨ 14-DAY FREE TRIAL</div>
+                <h1>Create Your Account</h1>
+                <p>Start automated forex trading with MT5 Bot Pro</p>
             </div>
             
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="john@example.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a strong password" minlength="8" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number (Optional)</label>
-                <input type="tel" id="phone" name="phone" placeholder="For Telegram alerts">
-            </div>
-            
-            <div class="form-group">
-                <label for="country">Country</label>
-                <select id="country" name="country" required>
-                    <option value="">Select your country</option>
-                    <option value="US">United States</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="CA">Canada</option>
-                    <option value="AU">Australia</option>
-                    <option value="DE">Germany</option>
-                    <option value="JP">Japan</option>
-                    <option value="SG">Singapore</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Select Your Plan</label>
-                <div class="plan-selection">
-                    <div class="plan-option">
-                        <input type="radio" id="planStarter" name="plan" value="starter" checked>
-                        <div class="plan-details">
-                            <div class="plan-name">Starter Plan</div>
-                            <div class="plan-price">$29/month after 7-day trial</div>
-                        </div>
+            <form class="signup-form" id="signupForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Smith" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a strong password" minlength="8" required>
+                    <div style="font-size: 0.7rem; color: var(--gray-500); margin-top: 0.3rem;">
+                        Minimum 8 characters with at least 1 number
                     </div>
-                    
-                    <div class="plan-option">
-                        <input type="radio" id="planPro" name="plan" value="pro">
-                        <div class="plan-details">
-                            <div class="plan-name">Pro Trader (Most Popular)</div>
-                            <div class="plan-price">$79/month after 7-day trial</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number <span style="color: var(--gray-500);">(Optional)</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="For Telegram signal alerts">
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select your country</option>
+                        <option value="US">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="CA">Canada</option>
+                        <option value="AU">Australia</option>
+                        <option value="DE">Germany</option>
+                        <option value="FR">France</option>
+                        <option value="JP">Japan</option>
+                        <option value="SG">Singapore</option>
+                        <option value="AE">UAE</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Your Plan</label>
+                    <div class="plan-selection">
+                        <div class="plan-option" data-plan="starter">
+                            <input type="radio" id="planStarter" name="plan" value="starter" checked>
+                            <div class="plan-details">
+                                <div class="plan-name">Starter Plan</div>
+                                <div class="plan-price">$29/month after 14-day trial</div>
+                                <div class="plan-features">2 pairs • Basic AI • Email support</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="plan-option">
-                        <input type="radio" id="planVIP" name="plan" value="vip">
-                        <div class="plan-details">
-                            <div class="plan-name">VIP Elite</div>
-                            <div class="plan-price">$199/month after 7-day trial</div>
+                        
+                        <div class="plan-option" data-plan="pro">
+                            <input type="radio" id="planPro" name="plan" value="pro">
+                            <div class="plan-details">
+                                <div class="plan-name">
+                                    Pro Trader 
+                                    <span class="popular-tag">MOST POPULAR</span>
+                                </div>
+                                <div class="plan-price">$79/month after 14-day trial</div>
+                                <div class="plan-features">7 pairs • Advanced AI • Telegram alerts • Priority support</div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-option" data-plan="vip">
+                            <input type="radio" id="planVIP" name="plan" value="vip">
+                            <div class="plan-details">
+                                <div class="plan-name">VIP Elite</div>
+                                <div class="plan-price">$199/month after 14-day trial</div>
+                                <div class="plan-features">28 pairs • Custom AI • 24/7 phone support • Account manager</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="form-group">
+                
                 <div class="terms">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that trading involves risk and past performance doesn't guarantee future results.</label>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. 
+                        I understand that forex trading involves substantial risk of loss.
+                    </label>
                 </div>
-            </div>
-            
-            <button type="submit" class="signup-button">Create Account & Start Free Trial</button>
-            
-            <div class="login-link">
-                Already have an account? <a href="login.html">Log in here</a>
-            </div>
-        </form>
+                
+                <button type="submit" class="signup-button">🚀 Start 14-Day Free Trial →</button>
+                
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Sign in here</a>
+                </div>
+                
+                <div class="security-note">
+                    🔒 Your information is secure. No credit card required for trial.
+                </div>
+            </form>
+        </div>
     </div>
-    
+
     <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                if (menu) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Plan selection highlighting
+        const planOptions = document.querySelectorAll('.plan-option');
+        planOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                }
+                
+                // Update selected class
+                planOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+            
+            // Check if radio is checked initially
+            const radio = option.querySelector('input[type="radio"]');
+            if (radio && radio.checked) {
+                option.classList.add('selected');
+            }
+        });
+        
         // Form submission handler
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
-            const formData = {
-                fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                phone: document.getElementById('phone').value,
-                country: document.getElementById('country').value,
-                plan: document.querySelector('input[name="plan"]:checked').value
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+            const country = document.getElementById('country').value;
+            const plan = document.querySelector('input[name="plan"]:checked').value;
+            const termsAccepted = document.getElementById('terms').checked;
+            
+            // Validation
+            if (!fullName || !email || !password || !country) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            if (!termsAccepted) {
+                alert('Please accept the Terms of Service and Privacy Policy.');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Plan name mapping
+            const planNames = {
+                starter: 'Starter',
+                pro: 'Pro Trader',
+                vip: 'VIP Elite'
             };
             
+            // Show success message
+            alert(`✅ Account Created Successfully!\n\nWelcome ${fullName}!\n\nPlan: ${planNames[plan]}\nTrial: 14 days free\n\nWe've sent setup instructions to:\n${email}\n\nCheck your inbox to get started with MT5 Bot Pro.`);
+            
             // In a real application, you would send this data to your server
-            // For demo purposes, we'll just show a success message
-            alert(`Account created successfully!\n\nWelcome ${formData.fullName}!\nYour ${formData.plan} plan trial has started.\nCheck your email (${formData.email}) for setup instructions.`);
+            console.log('Form submitted:', {
+                fullName,
+                email,
+                phone,
+                country,
+                plan,
+                timestamp: new Date().toISOString()
+            });
             
-            // Reset form
-            this.reset();
-            
-            // In a real app, you would redirect to dashboard
+            // Redirect to dashboard or download page in real app
             // window.location.href = 'dashboard.html';
         });
+        
+        // Real-time password strength indicator (optional enhancement)
+        const passwordInput = document.getElementById('password');
+        if (passwordInput) {
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const hasNumber = /\d/.test(password);
+                const hasLetter = /[a-zA-Z]/.test(password);
+                const isValidLength = password.length >= 8;
+                
+                if (password.length > 0) {
+                    if (isValidLength && hasNumber && hasLetter) {
+                        this.style.borderColor = 'var(--success)';
+                    } else if (password.length >= 8) {
+                        this.style.borderColor = 'var(--warning)';
+                    } else {
+                        this.style.borderColor = 'var(--danger)';
+                    }
+                } else {
+                    this.style.borderColor = 'var(--gray-700)';
+                }
+            });
+        }
     </script>
 </body>
 </html>
