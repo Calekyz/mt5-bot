@@ -1,432 +1,4 @@
-/* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-    color: #f8fafc;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    min-height: 100vh;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header & Navigation */
-.header {
-    padding: 20px 0;
-    border-bottom: 1px solid #334155;
-    position: fixed;
-    width: 100%;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    top: 0;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 700;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #3b82f6;
-}
-
-.login-button {
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    color: white;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.login-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
-}
-
-/* Hero Section */
-.hero {
-    padding: 180px 0 100px;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    color: #94a3b8;
-    margin-bottom: 40px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.cta-button {
-    display: inline-block;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    color: white;
-    text-decoration: none;
-    padding: 16px 40px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
-}
-
-/* Features Grid */
-.features {
-    padding: 100px 0;
-    background: rgba(30, 41, 59, 0.5);
-}
-
-.section-title {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 60px;
-    color: #e2e8f0;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.feature-card {
-    background: rgba(30, 41, 59, 0.9);
-    border-radius: 12px;
-    padding: 30px;
-    border: 1px solid #334155;
-    transition: transform 0.3s, border-color 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    border-color: #3b82f6;
-}
-
-.feature-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #e2e8f0;
-}
-
-.feature-card p {
-    color: #94a3b8;
-    font-size: 16px;
-}
-
-/* PRICING SECTION */
-.pricing-section {
-    padding: 100px 0;
-    text-align: center;
-}
-
-.pricing-section h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.section-subtitle {
-    font-size: 18px;
-    color: #94a3b8;
-    margin-bottom: 60px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.pricing-cards {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 50px auto;
-    max-width: 1200px;
-    flex-wrap: wrap;
-}
-
-.pricing-card {
-    background: rgba(30, 41, 59, 0.9);
-    border-radius: 16px;
-    padding: 30px;
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
-    border: 1px solid #334155;
-    position: relative;
-    transition: transform 0.3s;
-}
-
-.pricing-card:hover {
-    transform: translateY(-10px);
-}
-
-.pricing-card.popular {
-    border-color: #3b82f6;
-    transform: scale(1.05);
-}
-
-.pricing-card.popular:hover {
-    transform: scale(1.05) translateY(-10px);
-}
-
-.popular-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    color: white;
-    padding: 6px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.plan-header {
-    margin-bottom: 25px;
-}
-
-.plan-header h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #e2e8f0;
-}
-
-.price {
-    font-size: 48px;
-    font-weight: 700;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.period {
-    font-size: 16px;
-    color: #94a3b8;
-}
-
-.plan-features {
-    list-style: none;
-    text-align: left;
-    margin: 25px 0;
-}
-
-.plan-features li {
-    padding: 10px 0;
-    color: #cbd5e1;
-    border-bottom: 1px solid #334155;
-}
-
-.plan-features li:last-child {
-    border-bottom: none;
-}
-
-.plan-features li:before {
-    content: "•";
-    color: #3b82f6;
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-left: -1em;
-}
-
-.pricing-note {
-    color: #94a3b8;
-    font-size: 14px;
-    margin-top: 30px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Trial Banner */
-.trial-banner {
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    padding: 60px 0;
-    text-align: center;
-}
-
-.trial-banner h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.trial-banner .cta-button {
-    background: white;
-    color: #3b82f6;
-}
-
-.trial-banner .cta-button:hover {
-    background: #f1f5f9;
-}
-
-/* Footer */
-.footer {
-    padding: 60px 0 30px;
-    border-top: 1px solid #334155;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-section h4 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #e2e8f0;
-}
-
-.footer-section a {
-    display: block;
-    color: #94a3b8;
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: color 0.3s;
-}
-
-.footer-section a:hover {
-    color: #3b82f6;
-}
-
-.copyright {
-    text-align: center;
-    color: #64748b;
-    font-size: 14px;
-    padding-top: 30px;
-    border-top: 1px solid #334155;
-}
-
-/* Mobile Menu */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-    
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(15, 23, 42, 0.98);
-        flex-direction: column;
-        padding: 20px;
-        border-top: 1px solid #334155;
-    }
-    
-    .nav-links.active {
-        display: flex;
-    }
-    
-    .hero h1 {
-        font-size: 36px;
-    }
-    
-    .hero-subtitle {
-        font-size: 18px;
-    }
-    
-    .pricing-card.popular {
-        transform: none;
-    }
-    
-    .pricing-card.popular:hover {
-        transform: translateY(-10px);
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 150px 0 60px;
-    }
-    
-    .hero h1 {
-        font-size: 28px;
-    }
-    
-    .cta-button {
-        padding: 14px 30px;
-        font-size: 16px;
-    }
-    
-    .pricing-card {
-        min-width: 100%;
-    }
-}
-/* ===== PRICING PAGE STYLES ===== */
+/* ===== PRICING PAGE STYLES - ENHANCED PROFESSIONAL VERSION ===== */
 
 /* Page Base */
 .pricing-page {
@@ -446,6 +18,7 @@ body {
 .pricing-header {
     text-align: center;
     margin-bottom: 80px;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .pricing-main-title {
@@ -456,6 +29,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .pricing-subtitle {
@@ -477,19 +51,25 @@ body {
 /* Pricing Cards */
 .pricing-card {
     background: rgba(30, 41, 59, 0.95);
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
 }
+
+.pricing-card:nth-child(1) { animation-delay: 0.1s; }
+.pricing-card:nth-child(2) { animation-delay: 0.3s; }
+.pricing-card:nth-child(3) { animation-delay: 0.5s; }
 
 .pricing-card:hover {
     transform: translateY(-15px);
     border-color: rgba(59, 130, 246, 0.4);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 /* Popular Card Special Styling */
@@ -497,11 +77,12 @@ body {
     border: 2px solid #3b82f6;
     background: rgba(30, 41, 59, 0.98);
     transform: scale(1.02);
+    box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.2);
 }
 
 .pricing-card.popular:hover {
     transform: scale(1.02) translateY(-15px);
-    box-shadow: 0 30px 60px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 30px 60px -12px rgba(59, 130, 246, 0.3);
 }
 
 .popular-badge {
@@ -510,14 +91,14 @@ body {
     right: 20px;
     background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     color: white;
-    padding: 10px 25px;
+    padding: 8px 20px;
     border-radius: 50px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-    z-index: 2;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    z-index: 10;
 }
 
 /* Plan Header */
@@ -565,7 +146,7 @@ body {
     font-weight: 500;
 }
 
-/* Features List */
+/* Features List - IMPROVED */
 .plan-features {
     list-style: none;
     padding: 0;
@@ -575,7 +156,7 @@ body {
 .plan-features li {
     padding: 14px 0;
     color: #cbd5e1;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     padding-left: 35px;
@@ -586,52 +167,70 @@ body {
     border-bottom: none;
 }
 
+/* Feature Icons - FIXED */
 .plan-features li:before {
     content: '';
     position: absolute;
     left: 0;
-    top: 16px;
-    width: 20px;
-    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
     font-size: 1.2rem;
+    line-height: 1;
 }
 
-.plan-features li.feature-included:before {
+.feature-included:before {
     content: '✓';
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16, 185, 129, 0.15);
     color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
-.plan-features li.feature-excluded:before {
+.feature-excluded {
+    color: #64748b;
+}
+
+.feature-excluded:before {
     content: '✕';
     background: rgba(239, 68, 68, 0.1);
     color: #ef4444;
     border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-.plan-features li.feature-highlight {
+.feature-highlight {
     color: #ffffff;
     font-weight: 600;
+    background: rgba(59, 130, 246, 0.1);
+    margin: 5px -40px 5px -40px;
+    padding: 10px 40px;
+    border-radius: 8px;
 }
 
-/* CTA Button */
+.feature-highlight:before {
+    content: '★';
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* CTA Button - IMPROVED */
 .cta-button {
     display: block;
     width: 100%;
-    padding: 22px;
+    padding: 18px 24px;
     text-align: center;
     background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -648,18 +247,22 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
     transition: all 0.4s ease;
     z-index: -1;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -8px rgba(59, 130, 246, 0.5);
 }
 
 .cta-button:hover:before {
     left: 0;
+}
+
+.cta-button:active {
+    transform: translateY(1px);
 }
 
 .cta-button.outline {
@@ -668,9 +271,13 @@ body {
     color: #3b82f6;
 }
 
+.cta-button.outline:before {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+}
+
 .cta-button.outline:hover {
-    background: #3b82f6;
     color: white;
+    border-color: transparent;
 }
 
 /* Page Footer */
@@ -683,7 +290,7 @@ body {
 
 .pricing-note {
     color: #94a3b8;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -698,17 +305,19 @@ body {
     font-weight: 600;
     margin: 15px 0;
     border: 1px solid rgba(16, 185, 129, 0.3);
+    font-size: 1.4rem;
 }
 
-/* Decorative Elements */
+/* Decorative Elements - FIXED Z-INDEX */
 .card-decoration {
     position: absolute;
     width: 200px;
     height: 200px;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.1;
+    opacity: 0.08;
     z-index: 0;
+    pointer-events: none;
 }
 
 .decoration-blue {
@@ -723,10 +332,29 @@ body {
     left: -50px;
 }
 
-/* Responsive Design */
+/* Ensure card content stays above decorations */
+.pricing-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design - IMPROVED */
 @media (max-width: 1200px) {
     .pricing-grid {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
     }
 }
 
@@ -745,8 +373,9 @@ body {
     
     .pricing-grid {
         grid-template-columns: 1fr;
-        max-width: 400px;
+        max-width: 450px;
         margin: 0 auto 40px;
+        gap: 30px;
     }
     
     .pricing-card.popular {
@@ -754,7 +383,7 @@ body {
     }
     
     .pricing-card.popular:hover {
-        transform: translateY(-15px);
+        transform: translateY(-10px);
     }
     
     .price-amount {
@@ -764,12 +393,6 @@ body {
     .plan-name {
         font-size: 2.4rem;
     }
-}
-
-@media (max-width: 480px) {
-    .pricing-card {
-        padding: 30px 25px;
-    }
     
     .popular-badge {
         position: relative;
@@ -777,9 +400,79 @@ body {
         right: 0;
         display: inline-block;
         margin-bottom: 15px;
+        font-size: 1rem;
+    }
+    
+    .plan-header {
+        text-align: center;
+    }
+    
+    .plan-name:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .pricing-card {
+        padding: 30px 20px;
     }
     
     .price-amount {
-        font-size: 4.8rem;
+        font-size: 4.2rem;
     }
+    
+    .plan-name {
+        font-size: 2rem;
+    }
+    
+    .plan-features li {
+        font-size: 1.3rem;
+        padding-left: 30px;
+    }
+    
+    .plan-features li:before {
+        width: 18px;
+        height: 18px;
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 15px 20px;
+        font-size: 1.4rem;
+    }
+    
+    .feature-highlight {
+        margin: 5px -20px;
+        padding: 8px 20px;
+    }
+}
+
+/* Print Styles - Professional Touch */
+@media print {
+    .pricing-page {
+        background: white;
+        padding: 20px;
+    }
+    
+    .pricing-card {
+        break-inside: avoid;
+        border: 1px solid #ddd;
+        background: white;
+    }
+    
+    .cta-button {
+        display: none;
+    }
+}
+
+/* Accessibility - Focus States */
+.cta-button:focus-visible {
+    outline: 3px solid #3b82f6;
+    outline-offset: 3px;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
 }
