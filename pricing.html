@@ -1,74 +1,515 @@
-<div class="pricing-page">
-    <div class="pricing-container">
-        <header class="pricing-header">
-            <h1 class="pricing-main-title">💰 Simple & Transparent Pricing</h1>
-            <p class="pricing-subtitle">Choose the plan that fits your trading goals. Start with a risk-free 7-day trial.</p>
-        </header>
-        
-        <div class="pricing-grid">
-            <!-- Starter Plan -->
-            <div class="pricing-card">
-                <div class="card-decoration decoration-blue"></div>
-                <div class="plan-header">
-                    <h2 class="plan-name">Starter Plan</h2>
-                    <div class="price-amount">$29</div>
-                    <div class="price-period">per month</div>
-                </div>
-                <ul class="plan-features">
-                    <li class="feature-included">Full MT5 Bot Access</li>
-                    <li class="feature-included">2 Currency Pairs (EUR/USD, GBP/USD)</li>
-                    <li class="feature-included">Basic Risk Management</li>
-                    <li class="feature-included">Email Support</li>
-                    <li class="feature-excluded">Telegram Signal Alerts</li>
-                    <li class="feature-excluded">Manual Updates Only</li>
-                </ul>
-                <a href="#" class="cta-button outline">Start Free Trial</a>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | MT5 Trading Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        /* Professional Container */
+        .pricing-page {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Header Section - Professional & Clean */
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-subtitle {
+            font-size: 1.125rem;
+            color: #475569;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Professional Card Design */
+        .pricing-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* Popular Plan Highlight */
+        .pricing-card.popular {
+            border: 2px solid #3b82f6;
+            box-shadow: 0 20px 25px -12px rgba(59, 130, 246, 0.15);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            background: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        /* Plan Header */
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: inline-block;
+            letter-spacing: -0.02em;
+        }
+
+        .price-period {
+            font-size: 0.875rem;
+            color: #64748b;
+            display: inline-block;
+            margin-left: 0.25rem;
+        }
+
+        .price-note {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 1.5rem 0;
+        }
+
+        /* Features List - Clean & Scannable */
+        .plan-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+        }
+
+        .plan-features li {
+            padding: 0.625rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #334155;
+            font-size: 0.875rem;
+        }
+
+        .feature-included::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .feature-excluded {
+            color: #94a3b8;
+        }
+
+        .feature-excluded::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        .feature-highlight {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-highlight::before {
+            display: none;
+        }
+
+        .feature-highlight:first-child {
+            margin-top: 0;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .cta-button:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        .cta-button.outline {
+            background: transparent;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .cta-button.outline:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            transform: translateY(-1px);
+        }
+
+        /* Footer Section */
+        .pricing-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .trial-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: #0f172a;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-note {
+            color: #64748b;
+            font-size: 0.75rem;
+        }
+
+        /* Enterprise Section */
+        .enterprise-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: #f1f5f9;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .enterprise-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .enterprise-text {
+            color: #475569;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .enterprise-button {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            padding: 0.625rem 1.5rem;
+            border-radius: 0.5rem;
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .enterprise-button:hover {
+            background: white;
+            border-color: #94a3b8;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            margin-top: 4rem;
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 1rem 1.5rem;
+            background: #f8fafc;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table td {
+            padding: 1rem 1.5rem;
+            font-size: 0.875rem;
+            color: #334155;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-page {
+                padding: 2rem 1rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .pricing-main-title {
+                font-size: 1.875rem;
+            }
+
+            .pricing-subtitle {
+                font-size: 1rem;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+
+            .comparison-table table {
+                min-width: 600px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .price-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-page">
+        <div class="pricing-container">
+            <header class="pricing-header">
+                <h1 class="pricing-main-title">Simple, transparent pricing</h1>
+                <p class="pricing-subtitle">Choose the plan that works best for your trading needs. All plans include a 7-day free trial.</p>
+            </header>
             
-            <!-- Pro Trader (Popular) -->
-            <div class="pricing-card popular">
-                <div class="popular-badge">MOST POPULAR</div>
-                <div class="card-decoration decoration-purple"></div>
-                <div class="card-decoration decoration-blue"></div>
-                <div class="plan-header">
+            <div class="pricing-grid">
+                <!-- Starter Plan -->
+                <div class="pricing-card">
+                    <h2 class="plan-name">Starter</h2>
+                    <div class="price-amount">$29</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-note">Billed monthly</div>
+                    <div class="divider"></div>
+                    <ul class="plan-features">
+                        <li class="feature-included">Full MT5 bot access</li>
+                        <li class="feature-included">2 currency pairs (EUR/USD, GBP/USD)</li>
+                        <li class="feature-included">Basic risk management</li>
+                        <li class="feature-included">Email support</li>
+                        <li class="feature-excluded">Telegram signal alerts</li>
+                        <li class="feature-excluded">Manual updates only</li>
+                    </ul>
+                    <a href="#" class="cta-button outline">Start free trial →</a>
+                </div>
+                
+                <!-- Pro Trader (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Popular</div>
                     <h2 class="plan-name">Pro Trader</h2>
                     <div class="price-amount">$79</div>
-                    <div class="price-period">per month</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-note">Billed monthly</div>
+                    <div class="divider"></div>
+                    <ul class="plan-features">
+                        <li class="feature-highlight">Everything in Starter, plus:</li>
+                        <li class="feature-included">7 major currency pairs</li>
+                        <li class="feature-included">Advanced AI algorithms</li>
+                        <li class="feature-included">Telegram signal alerts</li>
+                        <li class="feature-included">Priority email & chat support</li>
+                        <li class="feature-included">Automatic strategy updates</li>
+                    </ul>
+                    <a href="#" class="cta-button">Start free trial →</a>
                 </div>
-                <ul class="plan-features">
-                    <li class="feature-highlight">Everything in Starter, plus:</li>
-                    <li class="feature-included">7 Major Currency Pairs</li>
-                    <li class="feature-included">Advanced AI Algorithms</li>
-                    <li class="feature-included">Telegram Signal Alerts</li>
-                    <li class="feature-included">Priority Email & Chat Support</li>
-                    <li class="feature-included">Auto Strategy Updates</li>
-                </ul>
-                <a href="#" class="cta-button">Start Free Trial</a>
-            </div>
-            
-            <!-- VIP Elite -->
-            <div class="pricing-card">
-                <div class="card-decoration decoration-purple"></div>
-                <div class="plan-header">
+                
+                <!-- VIP Elite -->
+                <div class="pricing-card">
                     <h2 class="plan-name">VIP Elite</h2>
                     <div class="price-amount">$199</div>
-                    <div class="price-period">per month</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-note">Billed monthly</div>
+                    <div class="divider"></div>
+                    <ul class="plan-features">
+                        <li class="feature-highlight">Everything in Pro, plus:</li>
+                        <li class="feature-included">All 28 forex pairs</li>
+                        <li class="feature-included">Custom strategy optimization</li>
+                        <li class="feature-included">24/7 phone support</li>
+                        <li class="feature-included">Dedicated account manager</li>
+                        <li class="feature-included">Weekly performance reports</li>
+                    </ul>
+                    <a href="#" class="cta-button outline">Start free trial →</a>
                 </div>
-                <ul class="plan-features">
-                    <li class="feature-highlight">Everything in Pro, plus:</li>
-                    <li class="feature-included">All 28 Forex Pairs</li>
-                    <li class="feature-included">Custom Strategy Optimization</li>
-                    <li class="feature-included">24/7 Phone Support</li>
-                    <li class="feature-included">Dedicated Account Manager</li>
-                    <li class="feature-included">Weekly Performance Reports</li>
-                </ul>
-                <a href="#" class="cta-button outline">Start Free Trial</a>
             </div>
+            
+            <!-- Enterprise Section -->
+            <div class="enterprise-section">
+                <h3 class="enterprise-title">Need a custom solution?</h3>
+                <p class="enterprise-text">Enterprise-grade features, volume discounts, and dedicated support for large trading operations.</p>
+                <a href="#" class="enterprise-button">Contact sales →</a>
+            </div>
+
+            <!-- Feature Comparison Table -->
+            <div class="comparison-section">
+                <h3 class="comparison-title">Compare features across plans</h3>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Starter</th>
+                                <th>Pro Trader</th>
+                                <th>VIP Elite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MT5 bot access</td>
+                                <td class="check-icon">✓</td>
+                                <td class="check-icon">✓</td>
+                                <td class="check-icon">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Currency pairs</td>
+                                <td>2 pairs</td>
+                                <td>7 pairs</td>
+                                <td>28 pairs</td>
+                            </tr>
+                            <tr>
+                                <td>AI algorithms</td>
+                                <td>Basic</td>
+                                <td>Advanced</td>
+                                <td>Custom</td>
+                            </tr>
+                            <tr>
+                                <td>Support response time</td>
+                                <td>48 hours</td>
+                                <td>24 hours</td>
+                                <td>1 hour</td>
+                            </tr>
+                            <tr>
+                                <td>Dedicated account manager</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="check-icon">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Custom strategy development</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="check-icon">✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer class="pricing-footer">
+                <div class="trial-highlight">
+                    <span>✨</span> 7-day free trial on all plans
+                </div>
+                <p class="pricing-note">No credit card required. Cancel anytime. All plans include full MT5 bot functionality during trial.</p>
+            </footer>
         </div>
-        
-        <footer class="pricing-footer">
-            <div class="trial-highlight">7-Day Free Trial Included</div>
-            <p class="pricing-note">All plans include a 7-day free trial. No credit card required. Cancel anytime.</p>
-        </footer>
     </div>
-</div>
+</body>
+</html>
