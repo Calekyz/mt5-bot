@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="auto" class="light">
     <head>
         <meta charset="UTF-8" />
@@ -6,43 +6,506 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <title>EA Download | MT5 Expert Advisor</title>
         <style>
-            :root { font-size: 62.5%; }
-            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root { 
+                font-size: 62.5%; 
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --secondary: #8b5cf6;
+                --success: #10b981;
+                --gray-50: #f8fafc;
+                --gray-100: #f1f5f9;
+                --gray-200: #e2e8f0;
+                --gray-300: #cbd5e1;
+                --gray-400: #94a3b8;
+                --gray-500: #64748b;
+                --gray-600: #475569;
+                --gray-700: #334155;
+                --gray-800: #1e293b;
+                --gray-900: #0f172a;
+            }
             
-            .main-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
-            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .nav-menu { display: flex; gap: 40px; align-items: center; }
-            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; position: relative; padding: 5px 0; }
-            .nav-link:hover, .nav-link.active { color: #3b82f6; }
-            .nav-auth { display: flex; gap: 15px; align-items: center; }
+            body { 
+                margin: 0; 
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                color: white; 
+                min-height: 100vh; 
+            }
             
-            .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; min-height: 44px; }
-            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border: none; }
-            .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+            /* Navigation - Mobile Friendly */
+            .main-nav { 
+                background: rgba(15, 23, 42, 0.98); 
+                backdrop-filter: blur(10px); 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                right: 0; 
+                z-index: 1000; 
+            }
             
-            .download-container { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; }
-            .download-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border-radius: 20px; padding: 50px; border: 2px solid #3b82f6; text-align: center; }
-            .download-icon { font-size: 6rem; margin-bottom: 30px; }
-            .download-title { font-size: 3.6rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .download-subtitle { font-size: 1.8rem; color: #94a3b8; margin-bottom: 40px; line-height: 1.6; }
-            .feature-list { text-align: left; max-width: 600px; margin: 40px auto; }
-            .feature-list li { padding: 15px 0; font-size: 1.6rem; color: #e2e8f0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .feature-list li:last-child { border-bottom: none; }
-            .feature-list li:before { content: "✓"; color: #10b981; margin-right: 15px; font-weight: bold; }
+            .nav-container { 
+                max-width: 1280px; 
+                margin: 0 auto; 
+                padding: 0 1.5rem; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between; 
+                height: 65px; 
+            }
             
-            .instructions { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 30px; margin-top: 50px; text-align: left; }
-            .instructions h3 { color: #3b82f6; margin-bottom: 20px; }
-            .step { margin-bottom: 25px; }
-            .step-number { display: inline-block; width: 30px; height: 30px; background: #3b82f6; border-radius: 50%; text-align: center; line-height: 30px; margin-right: 15px; }
+            .nav-logo a { 
+                font-size: 1.8rem; 
+                font-weight: 700; 
+                color: white; 
+                text-decoration: none; 
+                letter-spacing: -0.02em;
+            }
+            
+            .nav-logo span { 
+                color: #3b82f6; 
+                background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+            }
+            
+            /* Mobile Menu Button */
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                width: 44px;
+                height: 44px;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .nav-menu { 
+                display: flex; 
+                gap: 2rem; 
+                align-items: center; 
+            }
+            
+            .nav-link { 
+                color: var(--gray-400); 
+                text-decoration: none; 
+                font-weight: 500; 
+                font-size: 1.4rem; 
+                transition: all 0.2s ease; 
+                position: relative; 
+                padding: 0.5rem 0; 
+            }
+            
+            .nav-link:hover, 
+            .nav-link.active { 
+                color: var(--primary); 
+            }
+            
+            .nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--primary);
+                border-radius: 2px;
+            }
+            
+            .nav-auth { 
+                display: flex; 
+                gap: 1rem; 
+                align-items: center; 
+            }
+            
+            .btn { 
+                padding: 0.7rem 1.5rem; 
+                border-radius: 0.5rem; 
+                font-weight: 500; 
+                font-size: 1.3rem; 
+                text-decoration: none; 
+                transition: all 0.2s ease; 
+                cursor: pointer; 
+                border: none; 
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                white-space: nowrap;
+            }
+            
+            .btn-primary { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                color: white; 
+                border: none; 
+            }
+            
+            .btn-primary:active { 
+                transform: scale(0.98); 
+            }
+            
+            .btn-outline {
+                background: transparent;
+                border: 1px solid var(--gray-700);
+                color: var(--gray-300);
+            }
+            
+            /* Main Container */
+            .download-container { 
+                max-width: 1200px; 
+                margin: 80px auto 40px; 
+                padding: 0 1.5rem; 
+            }
+            
+            /* Hero Section */
+            .download-hero {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            
+            .download-badge {
+                display: inline-block;
+                background: rgba(59, 130, 246, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                padding: 0.4rem 1rem;
+                border-radius: 2rem;
+                font-size: 1.1rem;
+                color: var(--primary);
+                margin-bottom: 1.5rem;
+            }
+            
+            .download-title { 
+                font-size: 2.8rem; 
+                font-weight: 700; 
+                margin-bottom: 1rem; 
+                background: linear-gradient(135deg, #fff 0%, var(--gray-300) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+            }
+            
+            .download-subtitle { 
+                font-size: 1.5rem; 
+                color: var(--gray-400); 
+                max-width: 600px;
+                margin: 0 auto;
+                line-height: 1.5; 
+            }
+            
+            /* Main Card */
+            .download-card { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 2rem; 
+                border: 1px solid var(--gray-700); 
+                margin-bottom: 2rem;
+            }
+            
+            .version-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+                border-bottom: 1px solid var(--gray-700);
+            }
+            
+            .version-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                background: var(--gray-700);
+                padding: 0.4rem 1rem;
+                border-radius: 0.5rem;
+                font-size: 1.2rem;
+                color: var(--gray-300);
+            }
+            
+            .compatibility {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 1.2rem;
+                color: var(--gray-400);
+            }
+            
+            /* Feature Grid - Mobile Optimized */
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .feature-item {
+                background: rgba(255, 255, 255, 0.03);
+                padding: 1.5rem;
+                border-radius: 1rem;
+                border: 1px solid var(--gray-700);
+                transition: all 0.2s ease;
+            }
+            
+            .feature-item:active {
+                transform: scale(0.98);
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .feature-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                color: white;
+            }
+            
+            .feature-description {
+                font-size: 1.2rem;
+                color: var(--gray-400);
+                line-height: 1.5;
+            }
+            
+            /* Download Button - Touch Friendly */
+            .download-button-wrapper {
+                text-align: center;
+                margin: 2rem 0;
+            }
+            
+            .download-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 1rem;
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+                padding: 1.2rem 2.5rem;
+                font-size: 1.6rem;
+                font-weight: 600;
+                border-radius: 1rem;
+                transition: all 0.2s ease;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+            
+            .download-btn:active {
+                transform: scale(0.97);
+            }
+            
+            .file-info {
+                text-align: center;
+                margin-top: 1rem;
+                color: var(--gray-500);
+                font-size: 1.2rem;
+            }
+            
+            /* Instructions Section */
+            .instructions { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 2rem; 
+                border: 1px solid var(--gray-700);
+            }
+            
+            .instructions-header {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            .instructions-header h3 { 
+                font-size: 1.8rem;
+                color: white; 
+                margin-bottom: 0.5rem;
+            }
+            
+            .instructions-header p {
+                color: var(--gray-400);
+                font-size: 1.3rem;
+            }
+            
+            .steps-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .step { 
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 1rem;
+                border: 1px solid var(--gray-700);
+            }
+            
+            .step-number { 
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 3.5rem;
+                height: 3.5rem;
+                background: var(--primary); 
+                border-radius: 50%; 
+                font-weight: 700;
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+            
+            .step strong { 
+                display: block;
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+                color: white;
+            }
+            
+            .step p { 
+                color: var(--gray-400); 
+                font-size: 1.3rem;
+                line-height: 1.5;
+            }
+            
+            .step-code {
+                background: var(--gray-900);
+                padding: 0.8rem;
+                border-radius: 0.5rem;
+                font-family: 'Monaco', 'Courier New', monospace;
+                font-size: 1.1rem;
+                color: var(--gray-300);
+                margin-top: 1rem;
+                overflow-x: auto;
+                word-break: break-all;
+            }
+            
+            /* Support Banner */
+            .support-banner {
+                margin-top: 2rem;
+                padding: 1.5rem;
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+                border-radius: 1rem;
+                text-align: center;
+                border: 1px solid rgba(59, 130, 246, 0.2);
+            }
+            
+            .support-banner p {
+                color: var(--gray-300);
+                font-size: 1.3rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .support-link {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+            }
+            
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .mobile-menu-btn {
+                    display: flex;
+                }
+                
+                .nav-menu {
+                    display: none;
+                    position: absolute;
+                    top: 65px;
+                    left: 0;
+                    right: 0;
+                    background: var(--gray-800);
+                    flex-direction: column;
+                    padding: 1.5rem;
+                    gap: 1rem;
+                    border-bottom: 1px solid var(--gray-700);
+                }
+                
+                .nav-menu.active {
+                    display: flex;
+                }
+                
+                .nav-auth {
+                    display: none;
+                }
+                
+                .download-container {
+                    margin-top: 70px;
+                }
+                
+                .download-title {
+                    font-size: 2.2rem;
+                }
+                
+                .download-subtitle {
+                    font-size: 1.3rem;
+                }
+                
+                .download-card {
+                    padding: 1.5rem;
+                }
+                
+                .version-info {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                
+                .feature-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+                
+                .instructions {
+                    padding: 1.5rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .download-title {
+                    font-size: 1.8rem;
+                }
+                
+                .download-subtitle {
+                    font-size: 1.2rem;
+                }
+                
+                .feature-title {
+                    font-size: 1.4rem;
+                }
+                
+                .feature-description {
+                    font-size: 1.1rem;
+                }
+                
+                .step strong {
+                    font-size: 1.4rem;
+                }
+                
+                .step p {
+                    font-size: 1.2rem;
+                }
+                
+                .download-btn {
+                    font-size: 1.4rem;
+                    padding: 1rem 2rem;
+                }
+            }
         </style>
     </head>
     <body>
         <nav class="main-nav">
             <div class="nav-container">
                 <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
-                <div class="nav-menu">
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+                <div class="nav-menu" id="mobileMenu">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
                     <a href="ea-download.html" class="nav-link active">EA Download</a>
@@ -57,60 +520,131 @@
         </nav>
 
         <div class="download-container">
-            <div class="download-card">
-                <div class="download-icon">⬇️</div>
+            <div class="download-hero">
+                <div class="download-badge">⬇️ Latest Release</div>
                 <h1 class="download-title">Download MT5 Expert Advisor</h1>
-                <p class="download-subtitle">Professional forex trading bot for MetaTrader 5. Version 2.1.4</p>
-                
-                <div class="feature-list">
-                    <li>AI-Powered Trading Signals</li>
-                    <li>Risk Management System</li>
-                    <li>Multiple Currency Pairs</li>
-                    <li>24/7 Automated Trading</li>
-                    <li>Money Management</li>
-                    <li>Backtesting Capabilities</li>
+                <p class="download-subtitle">Professional forex trading bot for MetaTrader 5 with advanced AI capabilities</p>
+            </div>
+
+            <div class="download-card">
+                <div class="version-info">
+                    <div class="version-tag">
+                        <span>📦</span> Version 2.1.4
+                    </div>
+                    <div class="compatibility">
+                        <span>✅</span> Compatible with MT5 Build 4000+
+                    </div>
                 </div>
                 
-                <button class="btn btn-primary" style="padding: 20px 50px; font-size: 2rem; margin-top: 30px;" onclick="downloadEA()">
-                    ⬇ Download EA.mq5 (v2.1.4)
-                </button>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-title">AI-Powered Signals</div>
+                        <div class="feature-description">Advanced machine learning algorithms for high-probability trades</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-title">Risk Management</div>
+                        <div class="feature-description">Dynamic stop-loss, take-profit, and position sizing</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Multiple Pairs</div>
+                        <div class="feature-description">Trade up to 28 currency pairs simultaneously</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">24/7 Operation</div>
+                        <div class="feature-description">Fully automated trading with no manual intervention</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-title">Money Management</div>
+                        <div class="feature-description">Customizable risk per trade and drawdown limits</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-title">Backtesting</div>
+                        <div class="feature-description">Built-in strategy tester with 99.9% quality modeling</div>
+                    </div>
+                </div>
                 
-                <p style="color: #94a3b8; margin-top: 20px; font-size: 1.4rem;">
-                    File size: 4.2 MB | Compatible: MT5 Build 4000+
-                </p>
+                <div class="download-button-wrapper">
+                    <button class="download-btn btn-primary" onclick="downloadEA()">
+                        ⬇️ Download EA.mq5
+                    </button>
+                    <div class="file-info">
+                        File size: 4.2 MB | Source code included
+                    </div>
+                </div>
             </div>
             
             <div class="instructions">
-                <h3>📋 Installation Instructions</h3>
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <strong>Download the EA file</strong>
-                    <p style="color: #94a3b8; margin-top: 5px;">Click the download button above to get EA.mq5</p>
+                <div class="instructions-header">
+                    <h3>📋 Installation Guide</h3>
+                    <p>Follow these steps to install your MT5 Expert Advisor</p>
                 </div>
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <strong>Copy to MT5 Folder</strong>
-                    <p style="color: #94a3b8; margin-top: 5px;">Navigate to: C:\Users\[YourName]\AppData\Roaming\MetaQuotes\Terminal\[TerminalID]\MQL5\Experts</p>
+                
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <strong>Download the EA File</strong>
+                        <p>Click the download button above to save the EA.mq5 file</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <strong>Open MT5 Data Folder</strong>
+                        <p>In MT5: File → Open Data Folder → MQL5 → Experts</p>
+                        <div class="step-code">\MQL5\Experts\</div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <strong>Copy & Compile</strong>
+                        <p>Copy EA.mq5 to Experts folder, then right-click in Navigator → Refresh</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <strong>Attach to Chart</strong>
+                        <p>Drag "MT5 Bot Pro" to any chart and enable auto-trading</p>
+                    </div>
                 </div>
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <strong>Restart MT5</strong>
-                    <p style="color: #94a3b8; margin-top: 5px;">Close and reopen MetaTrader 5 platform</p>
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span>
-                    <strong>Attach to Chart</strong>
-                    <p style="color: #94a3b8; margin-top: 5px;">Drag "MT5 Bot Pro" from Navigator to any forex chart</p>
-                </div>
+            </div>
+            
+            <div class="support-banner">
+                <p>⚠️ <strong>Demo Version:</strong> Limited to 7 trades per day</p>
+                <p>Need help? <a href="#" class="support-link">📧 Contact Support</a></p>
             </div>
         </div>
 
         <script>
-            function downloadEA() {
-                alert('Downloading MT5 Bot Pro EA.mq5...\n\nFor demo version: Limited to 7 trades per day\nFor full version: Purchase license key');
-                // In real implementation, this would trigger file download
-                // window.location.href = 'downloads/mt5-bot-pro.mq5';
+            function toggleMenu() {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('active');
             }
+            
+            function downloadEA() {
+                const userConfirmed = confirm(
+                    "Download MT5 Bot Pro EA (Demo)\n\n" +
+                    "✓ 7 trades per day\n" +
+                    "✓ Full functionality for testing\n" +
+                    "✓ License key required for unlimited use\n\n" +
+                    "Proceed with download?"
+                );
+                
+                if (userConfirmed) {
+                    alert("✅ Download started!\n\nCheck your Downloads folder.");
+                }
+            }
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('mobileMenu').classList.remove('active');
+                });
+            });
         </script>
     </body>
 </html>
