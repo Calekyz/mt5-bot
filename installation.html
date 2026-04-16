@@ -1,63 +1,563 @@
-<!doctype html>
-<html lang="en" dir="auto" class="light">
+<!DOCTYPE html>
+<html lang="en" dir="auto">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="description" content="Complete step-by-step installation guide for MT5 Bot Pro Expert Advisor. Learn how to install and configure your EA on MetaTrader 5 platform." />
         <title>MT5 Installation Guide | Expert Advisor Setup</title>
         <style>
-            :root { font-size: 62.5%; }
-            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root { 
+                font-size: 62.5%; 
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --secondary: #8b5cf6;
+                --success: #10b981;
+                --warning: #f59e0b;
+                --danger: #ef4444;
+                --gray-50: #f8fafc;
+                --gray-100: #f1f5f9;
+                --gray-200: #e2e8f0;
+                --gray-300: #cbd5e1;
+                --gray-400: #94a3b8;
+                --gray-500: #64748b;
+                --gray-600: #475569;
+                --gray-700: #334155;
+                --gray-800: #1e293b;
+                --gray-900: #0f172a;
+            }
             
-            .main-nav { background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
-            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .nav-menu { display: flex; gap: 40px; align-items: center; }
-            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; }
-            .nav-link:hover, .nav-link.active { color: #3b82f6; }
+            body { 
+                margin: 0; 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+                background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+                color: white; 
+                min-height: 100vh;
+            }
             
-            .install-container { max-width: 1000px; margin: 90px auto 60px; padding: 0 20px; }
-            .install-header { text-align: center; margin-bottom: 50px; }
-            .install-title { font-size: 4.2rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .install-subtitle { font-size: 1.8rem; color: #94a3b8; line-height: 1.6; }
+            /* ===== PROFESSIONAL NAVIGATION - FIXED MOBILE ===== */
+            .main-nav { 
+                background: rgba(15, 23, 42, 0.98); 
+                backdrop-filter: blur(10px); 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                right: 0; 
+                z-index: 1000; 
+            }
             
-            /* Steps */
-            .steps-container { margin-top: 50px; }
-            .step { display: flex; margin-bottom: 50px; background: rgba(30, 41, 59, 0.7); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); }
-            .step-number { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; width: 80px; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; font-weight: 800; }
-            .step-content { padding: 30px; flex: 1; }
-            .step-title { font-size: 2.4rem; font-weight: 700; margin-bottom: 15px; color: white; }
-            .step-description { font-size: 1.6rem; color: #94a3b8; line-height: 1.6; margin-bottom: 20px; }
-            .step-image { margin: 20px 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); }
-            .step-image img { width: 100%; display: block; }
-            .step-code { background: #1e293b; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 1.4rem; color: #e2e8f0; border-left: 4px solid #3b82f6; }
+            .nav-container { 
+                max-width: 1400px; 
+                margin: 0 auto; 
+                padding: 0 2rem; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between; 
+                height: 70px; 
+            }
             
-            /* Requirements */
-            .requirements { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 30px; margin-bottom: 50px; border: 2px solid #3b82f6; }
-            .requirements h2 { color: #3b82f6; margin-bottom: 25px; }
-            .req-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-            .req-item { padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
-            .req-item i { font-size: 2.4rem; margin-bottom: 15px; display: block; }
-            .req-item h3 { margin-bottom: 10px; }
+            .nav-logo a { 
+                font-size: 2rem; 
+                font-weight: 700; 
+                color: white; 
+                text-decoration: none; 
+                letter-spacing: -0.02em;
+            }
             
-            /* Troubleshooting */
-            .troubleshooting { background: rgba(239, 68, 68, 0.1); border-radius: 15px; padding: 30px; margin-top: 50px; border: 1px solid rgba(239, 68, 68, 0.3); }
-            .troubleshooting h2 { color: #ef4444; margin-bottom: 25px; }
-            .issue { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .issue:last-child { border-bottom: none; }
-            .issue h3 { color: #fca5a5; margin-bottom: 10px; }
+            .nav-logo span { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+            }
+            
+            /* Mobile Menu Button */
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2.4rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                width: 44px;
+                height: 44px;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+            }
+            
+            .mobile-menu-btn:hover {
+                color: var(--primary);
+            }
+            
+            .nav-menu { 
+                display: flex; 
+                gap: 3rem; 
+                align-items: center; 
+            }
+            
+            .nav-link { 
+                color: var(--gray-400); 
+                text-decoration: none; 
+                font-weight: 500; 
+                font-size: 1.5rem; 
+                transition: all 0.2s ease; 
+                position: relative; 
+                padding: 0.5rem 0; 
+            }
+            
+            .nav-link:hover, 
+            .nav-link.active { 
+                color: var(--primary); 
+            }
+            
+            .nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--primary);
+                border-radius: 2px;
+            }
+            
+            .nav-auth { 
+                display: flex; 
+                gap: 1.5rem; 
+                align-items: center; 
+            }
             
             /* Buttons */
-            .btn { padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1.6rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
-            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; }
-            .btn-primary:hover { transform: translateY(-2px); }
-            .btn-container { text-align: center; margin-top: 50px; }
+            .btn { 
+                padding: 0.8rem 2rem; 
+                border-radius: 0.5rem; 
+                font-weight: 500; 
+                font-size: 1.4rem; 
+                text-decoration: none; 
+                transition: all 0.2s ease; 
+                cursor: pointer; 
+                border: none; 
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
             
+            .btn-outline { 
+                background: transparent; 
+                color: var(--primary); 
+                border: 2px solid var(--primary); 
+            }
+            
+            .btn-outline:hover { 
+                background: var(--primary); 
+                color: white; 
+                transform: translateY(-2px); 
+            }
+            
+            .btn-primary { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                color: white; 
+                border: none; 
+            }
+            
+            .btn-primary:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
+            }
+            
+            .btn-large {
+                padding: 1.2rem 3rem;
+                font-size: 1.6rem;
+            }
+            
+            /* Main Container */
+            .install-container { 
+                max-width: 1000px; 
+                margin: 90px auto 60px; 
+                padding: 0 2rem; 
+            }
+            
+            /* Header */
+            .install-header { 
+                text-align: center; 
+                margin-bottom: 5rem; 
+                animation: fadeInUp 0.6s ease-out;
+            }
+            
+            .install-title { 
+                font-size: 4.2rem; 
+                font-weight: 800; 
+                margin-bottom: 1.5rem; 
+                background: linear-gradient(135deg, #fff 0%, var(--gray-300) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                letter-spacing: -0.02em;
+            }
+            
+            .install-subtitle { 
+                font-size: 1.8rem; 
+                color: var(--gray-400); 
+                max-width: 700px; 
+                margin: 0 auto; 
+                line-height: 1.6; 
+            }
+            
+            .install-badge {
+                display: inline-block;
+                background: rgba(59, 130, 246, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                padding: 0.5rem 1rem;
+                border-radius: 2rem;
+                font-size: 1.2rem;
+                color: var(--primary);
+                margin-bottom: 2rem;
+            }
+            
+            /* Requirements */
+            .requirements { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 3rem; 
+                margin-bottom: 4rem; 
+                border: 1px solid var(--primary);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .requirements::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 200px;
+                height: 200px;
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+                pointer-events: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                color: white;
+            }
+            
+            .section-subtitle {
+                color: var(--gray-400);
+                font-size: 1.4rem;
+                margin-bottom: 2rem;
+            }
+            
+            .req-list { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+                gap: 2rem; 
+            }
+            
+            .req-item { 
+                padding: 2rem; 
+                background: rgba(255, 255, 255, 0.03); 
+                border-radius: 1rem; 
+                text-align: center;
+                transition: all 0.2s ease;
+                border: 1px solid var(--gray-700);
+            }
+            
+            .req-item:hover {
+                transform: translateY(-3px);
+                border-color: var(--primary);
+            }
+            
+            .req-icon { 
+                font-size: 3rem; 
+                margin-bottom: 1.5rem; 
+                display: block;
+            }
+            
+            .req-item h3 { 
+                font-size: 1.6rem;
+                margin-bottom: 0.8rem; 
+                color: white;
+            }
+            
+            .req-item p { 
+                color: var(--gray-400); 
+                font-size: 1.3rem;
+            }
+            
+            /* Steps Container */
+            .steps-container { 
+                margin-top: 4rem; 
+            }
+            
+            /* Step Card */
+            .step { 
+                display: flex; 
+                margin-bottom: 3rem; 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                overflow: hidden; 
+                border: 1px solid var(--gray-700); 
+                transition: all 0.3s ease;
+                position: relative;
+            }
+            
+            .step:hover {
+                transform: translateX(5px);
+                border-color: var(--primary);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .step-number { 
+                background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+                color: white; 
+                min-width: 80px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                font-size: 3.2rem; 
+                font-weight: 800; 
+            }
+            
+            .step-content { 
+                padding: 3rem; 
+                flex: 1; 
+            }
+            
+            .step-title { 
+                font-size: 2rem; 
+                font-weight: 700; 
+                margin-bottom: 1rem; 
+                color: white; 
+            }
+            
+            .step-description { 
+                font-size: 1.5rem; 
+                color: var(--gray-400); 
+                line-height: 1.6; 
+                margin-bottom: 1.5rem; 
+            }
+            
+            .step-code { 
+                background: var(--gray-900); 
+                border-radius: 1rem; 
+                padding: 1.5rem; 
+                margin: 1.5rem 0; 
+                font-family: 'Courier New', monospace; 
+                font-size: 1.3rem; 
+                color: var(--gray-300); 
+                border-left: 4px solid var(--primary); 
+                overflow-x: auto;
+            }
+            
+            .step-image { 
+                margin: 1.5rem 0; 
+                border-radius: 1rem; 
+                overflow: hidden; 
+                border: 1px solid var(--gray-700); 
+                background: var(--gray-900);
+            }
+            
+            .image-placeholder { 
+                background: var(--gray-900); 
+                padding: 3rem; 
+                text-align: center; 
+                color: var(--gray-500); 
+                font-size: 1.3rem;
+            }
+            
+            /* Troubleshooting */
+            .troubleshooting { 
+                background: rgba(239, 68, 68, 0.05); 
+                border-radius: 1.5rem; 
+                padding: 3rem; 
+                margin-top: 4rem; 
+                border: 1px solid rgba(239, 68, 68, 0.2);
+            }
+            
+            .troubleshooting-title {
+                color: var(--danger);
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 2rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .issue { 
+                margin-bottom: 2rem; 
+                padding-bottom: 2rem; 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            }
+            
+            .issue:last-child { 
+                border-bottom: none; 
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            
+            .issue h3 { 
+                color: #fca5a5; 
+                margin-bottom: 0.8rem; 
+                font-size: 1.6rem;
+            }
+            
+            .issue p { 
+                color: var(--gray-400); 
+                font-size: 1.4rem;
+                line-height: 1.6;
+            }
+            
+            /* Button Container */
+            .btn-container { 
+                text-align: center; 
+                margin-top: 4rem; 
+            }
+            
+            /* Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Responsive */
             @media (max-width: 768px) {
-                .step { flex-direction: column; }
-                .step-number { width: 100%; height: 60px; }
-                .nav-menu { display: none; }
+                .mobile-menu-btn {
+                    display: flex;
+                }
+                
+                .nav-menu {
+                    display: none;
+                    position: absolute;
+                    top: 70px;
+                    left: 0;
+                    right: 0;
+                    background: var(--gray-800);
+                    flex-direction: column;
+                    padding: 2rem;
+                    gap: 1.5rem;
+                    border-bottom: 1px solid var(--gray-700);
+                }
+                
+                .nav-menu.active {
+                    display: flex;
+                }
+                
+                .nav-auth {
+                    display: none;
+                }
+                
+                .install-container {
+                    margin-top: 80px;
+                    padding: 0 1.5rem;
+                }
+                
+                .install-title {
+                    font-size: 2.8rem;
+                }
+                
+                .install-subtitle {
+                    font-size: 1.4rem;
+                }
+                
+                .step {
+                    flex-direction: column;
+                }
+                
+                .step-number {
+                    min-width: 100%;
+                    height: 60px;
+                    font-size: 2.4rem;
+                }
+                
+                .step-content {
+                    padding: 2rem;
+                }
+                
+                .step-title {
+                    font-size: 1.8rem;
+                }
+                
+                .step-description {
+                    font-size: 1.4rem;
+                }
+                
+                .req-list {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+                
+                .requirements, .troubleshooting {
+                    padding: 2rem;
+                }
+                
+                .section-title {
+                    font-size: 1.8rem;
+                }
+                
+                .troubleshooting-title {
+                    font-size: 1.8rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .install-title {
+                    font-size: 2.2rem;
+                }
+                
+                .step-content {
+                    padding: 1.5rem;
+                }
+                
+                .step-code {
+                    font-size: 1.1rem;
+                    padding: 1rem;
+                }
+                
+                .issue h3 {
+                    font-size: 1.4rem;
+                }
+                
+                .issue p {
+                    font-size: 1.3rem;
+                }
+                
+                .btn-large {
+                    padding: 1rem 2rem;
+                    font-size: 1.4rem;
+                }
+            }
+            
+            /* Print Styles */
+            @media print {
+                .main-nav, .btn-container, .install-badge {
+                    display: none;
+                }
+                
+                .install-container {
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                .step {
+                    break-inside: avoid;
+                    border: 1px solid #ddd;
+                }
             }
         </style>
     </head>
@@ -65,7 +565,8 @@
         <nav class="main-nav">
             <div class="nav-container">
                 <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
-                <div class="nav-menu">
+                <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+                <div class="nav-menu" id="mobileMenu">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
                     <a href="ea-download.html" class="nav-link">EA Download</a>
@@ -83,33 +584,35 @@
         <div class="install-container">
             <!-- Header -->
             <div class="install-header">
+                <div class="install-badge">📘 COMPLETE SETUP GUIDE</div>
                 <h1 class="install-title">🛠️ MT5 Installation Guide</h1>
-                <p class="install-subtitle">Step-by-step instructions to install and configure the MT5 Expert Advisor on your MetaTrader 5 platform.</p>
+                <p class="install-subtitle">Follow this comprehensive step-by-step guide to install and configure your MT5 Bot Pro Expert Advisor on MetaTrader 5.</p>
             </div>
 
             <!-- Requirements -->
             <div class="requirements">
-                <h2>📋 System Requirements</h2>
+                <h2 class="section-title">📋 System Requirements</h2>
+                <p class="section-subtitle">Ensure your system meets these requirements before installation</p>
                 <div class="req-list">
                     <div class="req-item">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">💻</div>
+                        <span class="req-icon">💻</span>
                         <h3>MetaTrader 5</h3>
-                        <p style="color: #94a3b8;">Build 4000 or higher</p>
+                        <p>Build 4000 or higher</p>
                     </div>
                     <div class="req-item">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">🖥️</div>
+                        <span class="req-icon">🖥️</span>
                         <h3>Operating System</h3>
-                        <p style="color: #94a3b8;">Windows 10/11 or macOS</p>
+                        <p>Windows 10/11 or macOS</p>
                     </div>
                     <div class="req-item">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">📈</div>
+                        <span class="req-icon">📈</span>
                         <h3>Broker Account</h3>
-                        <p style="color: #94a3b8;">MT5-enabled forex broker</p>
+                        <p>MT5-enabled forex broker</p>
                     </div>
                     <div class="req-item">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">⚡</div>
+                        <span class="req-icon">⚡</span>
                         <h3>Internet Connection</h3>
-                        <p style="color: #94a3b8;">Stable, minimum 10 Mbps</p>
+                        <p>Stable, minimum 10 Mbps</p>
                     </div>
                 </div>
             </div>
@@ -123,17 +626,16 @@
                         <h2 class="step-title">Download MetaTrader 5</h2>
                         <p class="step-description">If you don't have MT5 installed, download it from your broker's website or from the official MetaQuotes website.</p>
                         <div class="step-code">
-                            Recommended Brokers:<br>
-                            • IC Markets<br>
-                            • Pepperstone<br>
-                            • FXTM<br>
-                            • XM<br>
-                            • ThinkMarkets
+                            <strong>📌 Recommended Brokers:</strong><br>
+                            • IC Markets - Raw spreads from 0.0 pips<br>
+                            • Pepperstone - Razor sharp spreads<br>
+                            • FXTM - Low minimum deposit ($10)<br>
+                            • XM - Excellent for beginners<br>
+                            • ThinkMarkets - Great execution
                         </div>
                         <div class="step-image">
-                            <!-- Image placeholder -->
-                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
-                                [MT5 Platform Screenshot]
+                            <div class="image-placeholder">
+                                [MT5 Platform Interface Screenshot]
                             </div>
                         </div>
                     </div>
@@ -144,14 +646,16 @@
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h2 class="step-title">Download the EA File</h2>
-                        <p class="step-description">Download the MT5 Bot Pro Expert Advisor file from our download page.</p>
+                        <p class="step-description">Download the MT5 Bot Pro Expert Advisor file from our download page. The file is compressed and ready for installation.</p>
                         <div class="step-code">
-                            File: MT5_Bot_Pro.ex5<br>
-                            Size: 4.2 MB<br>
-                            Version: 2.1.4
+                            <strong>📦 File Information:</strong><br>
+                            • File: MT5_Bot_Pro_v2.1.4.ex5<br>
+                            • Size: 4.2 MB<br>
+                            • Version: 2.1.4 (Latest)<br>
+                            • Compatibility: MT5 Build 4000+
                         </div>
-                        <div style="margin: 20px 0;">
-                            <a href="ea-download.html" class="btn btn-primary">⬇ Download EA File</a>
+                        <div style="margin: 2rem 0;">
+                            <a href="ea-download.html" class="btn btn-primary btn-large">⬇ Download EA File</a>
                         </div>
                     </div>
                 </div>
@@ -161,15 +665,16 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h2 class="step-title">Locate MT5 Data Folder</h2>
-                        <p class="step-description">Find your MT5 data folder where Expert Advisors are stored.</p>
+                        <p class="step-description">Find your MT5 data folder where Expert Advisors are stored. This is where you'll place the EA file.</p>
                         <div class="step-code">
-                            Windows Path:<br>
+                            <strong>📍 Windows Path:</strong><br>
                             C:\Users\[YourName]\AppData\Roaming\MetaQuotes\Terminal\[TerminalID]\MQL5\Experts<br><br>
-                            Quick Access: In MT5, click File → Open Data Folder
+                            <strong>⚡ Quick Access:</strong><br>
+                            In MT5, click File → Open Data Folder → MQL5 → Experts
                         </div>
                         <div class="step-image">
-                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
-                                [Data Folder Screenshot]
+                            <div class="image-placeholder">
+                                [Data Folder Navigation Screenshot]
                             </div>
                         </div>
                     </div>
@@ -180,13 +685,14 @@
                     <div class="step-number">4</div>
                     <div class="step-content">
                         <h2 class="step-title">Copy EA to Experts Folder</h2>
-                        <p class="step-description">Copy the downloaded EA file to the Experts folder in your MT5 data directory.</p>
+                        <p class="step-description">Copy the downloaded EA file to the Experts folder in your MT5 data directory and restart the platform.</p>
                         <div class="step-code">
-                            Steps:<br>
+                            <strong>📋 Installation Steps:</strong><br>
                             1. Open the downloaded .ex5 file location<br>
-                            2. Copy MT5_Bot_Pro.ex5<br>
-                            3. Paste into MQL5/Experts folder<br>
-                            4. Restart MT5 platform
+                            2. Copy MT5_Bot_Pro_v2.1.4.ex5<br>
+                            3. Navigate to MQL5/Experts folder<br>
+                            4. Paste the file into the Experts folder<br>
+                            5. Restart MT5 platform completely
                         </div>
                     </div>
                 </div>
@@ -196,15 +702,18 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <h2 class="step-title">Enable AutoTrading</h2>
-                        <p class="step-description">Enable automated trading in MT5 and attach the EA to a chart.</p>
+                        <p class="step-description">Enable automated trading in MT5 and attach the EA to a chart for it to start working.</p>
                         <div class="step-code">
+                            <strong>⚙️ AutoTrading Setup:</strong><br>
                             1. In MT5, click Tools → Options → Expert Advisors<br>
                             2. Check "Allow automated trading"<br>
-                            3. Click OK and restart MT5<br>
-                            4. Drag EA from Navigator to any forex chart
+                            3. Check "Allow DLL imports"<br>
+                            4. Click OK and restart MT5<br>
+                            5. Drag EA from Navigator to any forex chart<br>
+                            6. Click "OK" in the EA settings window
                         </div>
                         <div class="step-image">
-                            <div style="background: #1e293b; padding: 40px; text-align: center; color: #94a3b8;">
+                            <div class="image-placeholder">
                                 [AutoTrading Settings Screenshot]
                             </div>
                         </div>
@@ -216,14 +725,16 @@
                     <div class="step-number">6</div>
                     <div class="step-content">
                         <h2 class="step-title">Configure Settings</h2>
-                        <p class="step-description">Configure the EA settings according to your risk tolerance and trading preferences.</p>
+                        <p class="step-description">Configure the EA settings according to your risk tolerance and trading preferences for optimal performance.</p>
                         <div class="step-code">
-                            Recommended Settings:<br>
-                            • Risk per Trade: 1-2%<br>
-                            • Max Lots: 0.1-1.0<br>
+                            <strong>🎯 Recommended Settings:</strong><br>
+                            • Risk per Trade: 1-2% of account<br>
+                            • Max Lots: 0.1-1.0 (adjustable)<br>
                             • Stop Loss: 20-50 pips<br>
                             • Take Profit: 30-80 pips<br>
-                            • Trading Hours: All sessions
+                            • Trading Hours: All sessions (24/5)<br>
+                            • Max Spread: 2.0 pips<br>
+                            • Slippage: 1.0 pips
                         </div>
                     </div>
                 </div>
@@ -233,17 +744,19 @@
                     <div class="step-number">7</div>
                     <div class="step-content">
                         <h2 class="step-title">Activate License</h2>
-                        <p class="step-description">Enter your license key to activate the full version of the EA.</p>
+                        <p class="step-description">Enter your license key to activate the full version of the EA and unlock all premium features.</p>
                         <div class="step-code">
-                            Activation Process:<br>
-                            1. Purchase license from our website<br>
-                            2. Receive license key via email<br>
-                            3. Enter key in EA settings window<br>
-                            4. Click Activate<br>
-                            5. Restart EA if needed
+                            <strong>🔑 Activation Process:</strong><br>
+                            1. Purchase license from our pricing page<br>
+                            2. Receive license key via email instantly<br>
+                            3. Open EA settings in MT5<br>
+                            4. Enter license key in the activation field<br>
+                            5. Click "Activate License"<br>
+                            6. Restart EA if needed<br>
+                            7. License valid for 1 year
                         </div>
-                        <div style="margin: 20px 0;">
-                            <a href="pricing.html" class="btn btn-primary">🎫 Get License Key</a>
+                        <div style="margin: 2rem 0;">
+                            <a href="pricing.html" class="btn btn-primary btn-large">🎫 Get License Key</a>
                         </div>
                     </div>
                 </div>
@@ -251,35 +764,130 @@
 
             <!-- Troubleshooting -->
             <div class="troubleshooting">
-                <h2>🚨 Troubleshooting Common Issues</h2>
-                
-                <div class="issue">
-                    <h3>EA Not Appearing in Navigator</h3>
-                    <p style="color: #94a3b8;">Make sure you placed the .ex5 file in the correct Experts folder and restarted MT5. Check that the file is not blocked by Windows.</p>
+                <div class="troubleshooting-title">
+                    <span>🚨</span> Troubleshooting Common Issues
                 </div>
                 
                 <div class="issue">
-                    <h3>AutoTrading Not Working</h3>
-                    <p style="color: #94a3b8;">Enable DLL imports in MT5 settings (Tools → Options → Expert Advisors → Allow DLL imports). Also check your broker allows EAs.</p>
+                    <h3>❓ EA Not Appearing in Navigator</h3>
+                    <p>Make sure you placed the .ex5 file in the correct Experts folder and restarted MT5 completely. Check that the file is not blocked by Windows (right-click → Properties → Unblock). Also verify the file extension is .ex5, not .ex4.</p>
                 </div>
                 
                 <div class="issue">
-                    <h3>EA Not Placing Trades</h3>
-                    <p style="color: #94a3b8;">Check that you have sufficient margin, trading is enabled for the symbol, and market is open. Verify EA settings are correct.</p>
+                    <h3>❓ AutoTrading Not Working</h3>
+                    <p>Enable DLL imports in MT5 settings (Tools → Options → Expert Advisors → Allow DLL imports). Also check that your broker allows Expert Advisors - most do, but some have restrictions. Ensure the "AutoTrading" button in MT5 is green.</p>
                 </div>
                 
                 <div class="issue">
-                    <h3>Error 133 or 138</h3>
-                    <p style="color: #94a3b8;">These are trading errors. Error 133 means invalid stops, Error 138 means requote. Adjust your stop loss/take profit levels.</p>
+                    <h3>❓ EA Not Placing Trades</h3>
+                    <p>Check that you have sufficient margin, trading is enabled for the symbol, and the market is open. Verify EA settings are correct and risk parameters are appropriate for your account size. Check the Experts tab for error messages.</p>
+                </div>
+                
+                <div class="issue">
+                    <h3>❓ Error 133 or 138</h3>
+                    <p>Error 133 means invalid stops - adjust your stop loss/take profit levels. Error 138 means requote - increase slippage settings or trade during less volatile times. These are common with volatile market conditions.</p>
+                </div>
+                
+                <div class="issue">
+                    <h3>❓ EA Shows Smiley Face But No Trades</h3>
+                    <p>The smiley face indicates EA is working but waiting for conditions. Check that your currency pair is supported, timeframes are correct, and market conditions match the EA's strategy. Test on demo account first.</p>
                 </div>
             </div>
 
             <!-- Support Button -->
             <div class="btn-container">
-                <a href="contact.html" class="btn btn-primary" style="padding: 20px 40px; font-size: 1.8rem;">
+                <a href="contact.html" class="btn btn-primary btn-large">
                     🆘 Need Help? Contact Support
                 </a>
+                <p style="color: var(--gray-500); font-size: 1.2rem; margin-top: 1.5rem;">
+                    24/7 Priority Support for Pro and VIP plan members
+                </p>
             </div>
         </div>
+
+        <script>
+            // Toggle Mobile Menu
+            function toggleMenu() {
+                const menu = document.getElementById('mobileMenu');
+                if (menu) {
+                    menu.classList.toggle('active');
+                }
+            }
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    const menu = document.getElementById('mobileMenu');
+                    if (menu) {
+                        menu.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Add smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Add copy functionality to code blocks
+            document.querySelectorAll('.step-code').forEach(codeBlock => {
+                codeBlock.style.position = 'relative';
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.textContent = '📋 Copy';
+                copyBtn.style.cssText = `
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: var(--primary);
+                    color: white;
+                    border: none;
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 0.4rem;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    opacity: 0;
+                    transition: opacity 0.2s;
+                `;
+                
+                codeBlock.addEventListener('mouseenter', () => {
+                    copyBtn.style.opacity = '1';
+                });
+                
+                codeBlock.addEventListener('mouseleave', () => {
+                    copyBtn.style.opacity = '0';
+                });
+                
+                copyBtn.addEventListener('click', () => {
+                    const text = codeBlock.innerText;
+                    navigator.clipboard.writeText(text).then(() => {
+                        copyBtn.textContent = '✓ Copied!';
+                        setTimeout(() => {
+                            copyBtn.textContent = '📋 Copy';
+                        }, 2000);
+                    });
+                });
+                
+                codeBlock.appendChild(copyBtn);
+            });
+            
+            // Track installation completion (optional analytics)
+            function trackInstallStep(stepNumber) {
+                console.log(`User completed installation step ${stepNumber}`);
+                // You can add Google Analytics or other tracking here
+            }
+        </script>
     </body>
 </html>
