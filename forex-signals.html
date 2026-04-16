@@ -1,91 +1,729 @@
-<!doctype html>
-<html lang="en" dir="auto" class="light">
+<!DOCTYPE html>
+<html lang="en" dir="auto">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/mt5-logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <title>Forex Trading Signals | MT5 Bot</title>
+        <meta name="description" content="Live AI-powered forex trading signals for MT5. Real-time buy/sell recommendations with entry, stop loss, and take profit levels. 87.3% signal accuracy." />
+        <title>Forex Trading Signals | Live AI-Powered MT5 Signals</title>
         <style>
-            :root { font-size: 62.5%; }
-            body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0f172a; color: white; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root { 
+                font-size: 62.5%; 
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --secondary: #8b5cf6;
+                --success: #10b981;
+                --warning: #f59e0b;
+                --danger: #ef4444;
+                --gray-50: #f8fafc;
+                --gray-100: #f1f5f9;
+                --gray-200: #e2e8f0;
+                --gray-300: #cbd5e1;
+                --gray-400: #94a3b8;
+                --gray-500: #64748b;
+                --gray-600: #475569;
+                --gray-700: #334155;
+                --gray-800: #1e293b;
+                --gray-900: #0f172a;
+            }
             
-            /* Navigation */
-            .main-nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-            .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
-            .nav-logo a { font-size: 2.4rem; font-weight: 800; color: white; text-decoration: none; }
-            .nav-logo span { color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .nav-menu { display: flex; gap: 40px; align-items: center; }
-            .nav-link { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 1.6rem; transition: all 0.3s ease; position: relative; padding: 5px 0; }
-            .nav-link:hover, .nav-link.active { color: #3b82f6; }
-            .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); border-radius: 2px; }
+            body { 
+                margin: 0; 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+                background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+                color: white; 
+                min-height: 100vh;
+            }
             
-            /* Main Content */
-            .main-container { max-width: 1400px; margin: 90px auto 40px; padding: 0 20px; }
-            .page-header { text-align: center; margin-bottom: 50px; }
-            .page-title { font-size: 4.2rem; font-weight: 800; margin-bottom: 20px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .page-subtitle { font-size: 1.8rem; color: #94a3b8; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+            /* ===== PROFESSIONAL NAVIGATION - FIXED MOBILE ===== */
+            .main-nav { 
+                background: rgba(15, 23, 42, 0.98); 
+                backdrop-filter: blur(10px); 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                right: 0; 
+                z-index: 1000; 
+            }
             
-            /* Signal Grid */
-            .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 40px; }
+            .nav-container { 
+                max-width: 1400px; 
+                margin: 0 auto; 
+                padding: 0 2rem; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between; 
+                height: 70px; 
+            }
             
-            /* Signal Card */
-            .signal-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 25px; transition: all 0.3s ease; }
-            .signal-card.buy { border-left: 5px solid #10b981; }
-            .signal-card.sell { border-left: 5px solid #ef4444; }
-            .signal-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+            .nav-logo a { 
+                font-size: 2rem; 
+                font-weight: 700; 
+                color: white; 
+                text-decoration: none; 
+                letter-spacing: -0.02em;
+            }
             
-            .signal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-            .signal-pair { font-size: 2.2rem; font-weight: 700; }
-            .signal-type { padding: 8px 20px; border-radius: 20px; font-size: 1.4rem; font-weight: 600; }
-            .signal-type.buy { background: rgba(16, 185, 129, 0.2); color: #10b981; }
-            .signal-type.sell { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+            .nav-logo span { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+            }
             
-            .signal-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
-            .signal-detail { text-align: center; }
-            .detail-label { font-size: 1.3rem; color: #94a3b8; margin-bottom: 5px; }
-            .detail-value { font-size: 1.8rem; font-weight: 600; }
+            /* Mobile Menu Button */
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2.4rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                width: 44px;
+                height: 44px;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+            }
             
-            .signal-strength { margin: 20px 0; }
-            .strength-bar { height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; }
-            .strength-fill { height: 100%; border-radius: 4px; }
-            .strength-fill.high { background: linear-gradient(135deg, #10b981, #059669); }
-            .strength-fill.medium { background: linear-gradient(135deg, #f59e0b, #d97706); }
-            .strength-fill.low { background: linear-gradient(135deg, #ef4444, #dc2626); }
+            .mobile-menu-btn:hover {
+                color: var(--primary);
+            }
             
-            .signal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-            .signal-time { font-size: 1.3rem; color: #94a3b8; }
+            .nav-menu { 
+                display: flex; 
+                gap: 3rem; 
+                align-items: center; 
+            }
             
-            /* Time Filters */
-            .time-filters { display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
-            .time-filter { padding: 10px 25px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
-            .time-filter.active { background: #3b82f6; color: white; }
+            .nav-link { 
+                color: var(--gray-400); 
+                text-decoration: none; 
+                font-weight: 500; 
+                font-size: 1.5rem; 
+                transition: all 0.2s ease; 
+                position: relative; 
+                padding: 0.5rem 0; 
+            }
             
-            /* Performance Stats */
-            .performance-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 50px; }
-            .stat-card { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 25px; text-align: center; }
-            .stat-value { font-size: 3.2rem; font-weight: 800; margin-bottom: 10px; }
-            .stat-value.positive { color: #10b981; }
-            .stat-value.negative { color: #ef4444; }
-            .stat-label { font-size: 1.4rem; color: #94a3b8; }
+            .nav-link:hover, 
+            .nav-link.active { 
+                color: var(--primary); 
+            }
             
-            /* Alert System */
-            .alert-system { background: rgba(30, 41, 59, 0.7); border-radius: 15px; padding: 30px; margin-top: 50px; border: 1px solid #3b82f6; }
-            .alert-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-            .alert-icon { font-size: 2.4rem; }
-            .alert-title { font-size: 2.4rem; font-weight: 700; }
+            .nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--primary);
+                border-radius: 2px;
+            }
+            
+            .nav-auth { 
+                display: flex; 
+                gap: 1.5rem; 
+                align-items: center; 
+            }
             
             /* Buttons */
-            .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; min-height: 44px; }
-            .btn-primary { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; border: none; }
-            .btn-primary:hover { transform: translateY(-2px); }
-            .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
+            .btn { 
+                padding: 0.8rem 2rem; 
+                border-radius: 0.5rem; 
+                font-weight: 500; 
+                font-size: 1.4rem; 
+                text-decoration: none; 
+                transition: all 0.2s ease; 
+                cursor: pointer; 
+                border: none; 
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
             
-            /* Mobile */
+            .btn-outline { 
+                background: transparent; 
+                color: var(--primary); 
+                border: 2px solid var(--primary); 
+            }
+            
+            .btn-outline:hover { 
+                background: var(--primary); 
+                color: white; 
+                transform: translateY(-2px); 
+            }
+            
+            .btn-primary { 
+                background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+                color: white; 
+                border: none; 
+            }
+            
+            .btn-primary:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
+            }
+            
+            .btn-success { 
+                background: linear-gradient(135deg, var(--success) 0%, #059669 100%); 
+                color: white; 
+            }
+            
+            .btn-purple {
+                background: linear-gradient(135deg, var(--secondary) 0%, #7c3aed 100%);
+                color: white;
+            }
+            
+            /* Main Container */
+            .main-container { 
+                max-width: 1400px; 
+                margin: 90px auto 40px; 
+                padding: 0 2rem; 
+            }
+            
+            /* Page Header */
+            .page-header { 
+                text-align: center; 
+                margin-bottom: 5rem; 
+                animation: fadeInUp 0.6s ease-out;
+            }
+            
+            .page-title { 
+                font-size: 4.2rem; 
+                font-weight: 800; 
+                margin-bottom: 1.5rem; 
+                background: linear-gradient(135deg, #fff 0%, var(--gray-300) 100%); 
+                -webkit-background-clip: text; 
+                -webkit-text-fill-color: transparent; 
+                letter-spacing: -0.02em;
+            }
+            
+            .page-subtitle { 
+                font-size: 1.8rem; 
+                color: var(--gray-400); 
+                max-width: 800px; 
+                margin: 0 auto; 
+                line-height: 1.6; 
+            }
+            
+            .live-badge {
+                display: inline-block;
+                background: rgba(239, 68, 68, 0.2);
+                border: 1px solid rgba(239, 68, 68, 0.3);
+                padding: 0.5rem 1rem;
+                border-radius: 2rem;
+                font-size: 1.2rem;
+                color: var(--danger);
+                margin-bottom: 2rem;
+                animation: pulse 2s infinite;
+            }
+            
+            /* Time Filters */
+            .time-filters { 
+                display: flex; 
+                gap: 1.2rem; 
+                margin-bottom: 3rem; 
+                justify-content: center; 
+                flex-wrap: wrap; 
+            }
+            
+            .time-filter { 
+                padding: 0.8rem 2rem; 
+                background: var(--gray-800); 
+                border-radius: 0.8rem; 
+                cursor: pointer; 
+                transition: all 0.2s ease; 
+                font-size: 1.4rem;
+                font-weight: 500;
+                border: 1px solid var(--gray-700);
+            }
+            
+            .time-filter:hover { 
+                background: var(--gray-700); 
+            }
+            
+            .time-filter.active { 
+                background: var(--primary); 
+                color: white; 
+                border-color: var(--primary);
+            }
+            
+            /* Signal Grid */
+            .signal-grid { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); 
+                gap: 2.5rem; 
+                margin-bottom: 4rem; 
+            }
+            
+            /* Signal Card */
+            .signal-card { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 2.5rem; 
+                transition: all 0.3s ease; 
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .signal-card.buy { 
+                border-left: 4px solid var(--success); 
+            }
+            
+            .signal-card.sell { 
+                border-left: 4px solid var(--danger); 
+            }
+            
+            .signal-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100px;
+                height: 100px;
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+                pointer-events: none;
+            }
+            
+            .signal-card:hover { 
+                transform: translateY(-5px); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+            }
+            
+            .signal-header { 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                margin-bottom: 2rem; 
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .signal-pair { 
+                font-size: 2.2rem; 
+                font-weight: 700; 
+            }
+            
+            .signal-type { 
+                padding: 0.5rem 1.5rem; 
+                border-radius: 2rem; 
+                font-size: 1.3rem; 
+                font-weight: 600; 
+            }
+            
+            .signal-type.buy { 
+                background: rgba(16, 185, 129, 0.15); 
+                color: var(--success); 
+                border: 1px solid rgba(16, 185, 129, 0.3);
+            }
+            
+            .signal-type.sell { 
+                background: rgba(239, 68, 68, 0.15); 
+                color: var(--danger); 
+                border: 1px solid rgba(239, 68, 68, 0.3);
+            }
+            
+            /* Signal Details */
+            .signal-details { 
+                display: grid; 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 1.5rem; 
+                margin: 2rem 0; 
+            }
+            
+            .signal-detail { 
+                text-align: center; 
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 1rem;
+            }
+            
+            .detail-label { 
+                font-size: 1.2rem; 
+                color: var(--gray-400); 
+                margin-bottom: 0.5rem; 
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .detail-value { 
+                font-size: 1.6rem; 
+                font-weight: 600; 
+                font-family: 'Courier New', monospace;
+            }
+            
+            /* Signal Strength */
+            .signal-strength { 
+                margin: 2rem 0; 
+            }
+            
+            .strength-header {
+                display: flex; 
+                justify-content: space-between; 
+                margin-bottom: 0.8rem;
+            }
+            
+            .strength-label { 
+                color: var(--gray-400); 
+                font-size: 1.2rem; 
+            }
+            
+            .strength-value { 
+                font-weight: 600; 
+                font-size: 1.2rem;
+                text-transform: capitalize;
+            }
+            
+            .strength-bar { 
+                height: 0.6rem; 
+                background: var(--gray-700); 
+                border-radius: 0.3rem; 
+                overflow: hidden; 
+            }
+            
+            .strength-fill { 
+                height: 100%; 
+                border-radius: 0.3rem; 
+                transition: width 0.3s ease;
+            }
+            
+            .strength-fill.high { 
+                background: linear-gradient(90deg, var(--success), #059669); 
+            }
+            
+            .strength-fill.medium { 
+                background: linear-gradient(90deg, var(--warning), #d97706); 
+            }
+            
+            .strength-fill.low { 
+                background: linear-gradient(90deg, var(--danger), #dc2626); 
+            }
+            
+            /* Signal Footer */
+            .signal-footer { 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                margin-top: 2rem; 
+                padding-top: 1.5rem;
+                border-top: 1px solid var(--gray-700);
+            }
+            
+            .signal-pips {
+                text-align: left;
+            }
+            
+            .pips-label {
+                font-size: 1.2rem;
+                color: var(--gray-400);
+            }
+            
+            .pips-value {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
+            
+            .pips-value.buy { color: var(--success); }
+            .pips-value.sell { color: var(--danger); }
+            
+            .signal-time { 
+                font-size: 1.2rem; 
+                color: var(--gray-400); 
+            }
+            
+            .signal-status {
+                padding: 0.3rem 1rem;
+                border-radius: 1.2rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+            
+            .signal-status.active {
+                background: rgba(16, 185, 129, 0.15);
+                color: var(--success);
+            }
+            
+            .signal-status.closed {
+                background: rgba(148, 163, 184, 0.15);
+                color: var(--gray-400);
+            }
+            
+            /* Alert System */
+            .alert-system { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 3rem; 
+                margin-bottom: 4rem; 
+                border: 1px solid var(--primary);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .alert-system::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 300px;
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+                pointer-events: none;
+            }
+            
+            .alert-header { 
+                display: flex; 
+                align-items: center; 
+                gap: 1.5rem; 
+                margin-bottom: 2rem; 
+            }
+            
+            .alert-icon { 
+                font-size: 2.4rem; 
+            }
+            
+            .alert-title { 
+                font-size: 2.4rem; 
+                font-weight: 700; 
+            }
+            
+            .alert-description {
+                color: var(--gray-400);
+                font-size: 1.5rem;
+                line-height: 1.6;
+                margin-bottom: 2.5rem;
+            }
+            
+            .alert-buttons {
+                display: flex;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            
+            /* Performance Stats */
+            .performance-stats { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+                gap: 2rem; 
+                margin-top: 4rem; 
+            }
+            
+            .stat-card { 
+                background: var(--gray-800); 
+                border-radius: 1.5rem; 
+                padding: 2.5rem; 
+                text-align: center; 
+                transition: all 0.2s ease;
+                border: 1px solid var(--gray-700);
+            }
+            
+            .stat-card:hover {
+                transform: translateY(-3px);
+                border-color: var(--primary);
+            }
+            
+            .stat-value { 
+                font-size: 3.2rem; 
+                font-weight: 800; 
+                margin-bottom: 0.8rem; 
+                letter-spacing: -0.02em;
+            }
+            
+            .stat-value.positive { 
+                color: var(--success); 
+            }
+            
+            .stat-value.negative { 
+                color: var(--danger); 
+            }
+            
+            .stat-label { 
+                font-size: 1.3rem; 
+                color: var(--gray-400); 
+            }
+            
+            /* Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.7; }
+            }
+            
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            /* Notification */
+            .notification {
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                background: var(--gray-800);
+                border-left: 4px solid var(--primary);
+                color: white;
+                padding: 1.5rem 2rem;
+                border-radius: 1rem;
+                z-index: 10000;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+                min-width: 280px;
+            }
+            
+            /* Responsive */
             @media (max-width: 768px) {
-                .nav-menu { display: none; }
-                .page-title { font-size: 3.2rem; }
-                .signal-grid { grid-template-columns: 1fr; }
-                .signal-card { margin: 0 10px; }
+                .mobile-menu-btn {
+                    display: flex;
+                }
+                
+                .nav-menu {
+                    display: none;
+                    position: absolute;
+                    top: 70px;
+                    left: 0;
+                    right: 0;
+                    background: var(--gray-800);
+                    flex-direction: column;
+                    padding: 2rem;
+                    gap: 1.5rem;
+                    border-bottom: 1px solid var(--gray-700);
+                }
+                
+                .nav-menu.active {
+                    display: flex;
+                }
+                
+                .nav-auth {
+                    display: none;
+                }
+                
+                .main-container {
+                    margin-top: 80px;
+                    padding: 0 1.5rem;
+                }
+                
+                .page-title {
+                    font-size: 2.8rem;
+                }
+                
+                .page-subtitle {
+                    font-size: 1.4rem;
+                }
+                
+                .signal-grid {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+                
+                .signal-card {
+                    padding: 2rem;
+                }
+                
+                .signal-details {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                }
+                
+                .alert-system {
+                    padding: 2rem;
+                }
+                
+                .alert-title {
+                    font-size: 1.8rem;
+                }
+                
+                .alert-description {
+                    font-size: 1.3rem;
+                }
+                
+                .alert-buttons {
+                    flex-direction: column;
+                }
+                
+                .alert-buttons .btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+                
+                .performance-stats {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
+                
+                .stat-value {
+                    font-size: 2.4rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .page-title {
+                    font-size: 2.2rem;
+                }
+                
+                .time-filters {
+                    gap: 0.8rem;
+                }
+                
+                .time-filter {
+                    padding: 0.6rem 1.2rem;
+                    font-size: 1.2rem;
+                }
+                
+                .signal-header {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                
+                .signal-details {
+                    grid-template-columns: 1fr;
+                }
+                
+                .performance-stats {
+                    grid-template-columns: 1fr;
+                }
+                
+                .notification {
+                    left: 20px;
+                    right: 20px;
+                    min-width: auto;
+                }
             }
         </style>
     </head>
@@ -93,7 +731,8 @@
         <nav class="main-nav">
             <div class="nav-container">
                 <div class="nav-logo"><a href="index.html">MT5<span>Bot</span></a></div>
-                <div class="nav-menu">
+                <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+                <div class="nav-menu" id="mobileMenu">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="mt5-bot.html" class="nav-link">MT5 Bot</a>
                     <a href="forex-signals.html" class="nav-link active">Signals</a>
@@ -111,17 +750,18 @@
         <div class="main-container">
             <!-- Header -->
             <div class="page-header">
-                <h1 class="page-title">📡 Live Forex Signals</h1>
-                <p class="page-subtitle">AI-generated trading signals for MetaTrader 5. Real-time buy/sell recommendations with entry, stop loss, and take profit levels.</p>
+                <div class="live-badge">🔴 LIVE SIGNALS</div>
+                <h1 class="page-title">📡 AI-Powered Forex Signals</h1>
+                <p class="page-subtitle">Real-time trading signals generated by advanced AI algorithms. Get precise entry, stop loss, and take profit levels for MT5.</p>
             </div>
 
             <!-- Time Filters -->
             <div class="time-filters">
-                <div class="time-filter active" onclick="filterSignals('all')">All Signals</div>
-                <div class="time-filter" onclick="filterSignals('today')">Today</div>
-                <div class="time-filter" onclick="filterSignals('1h')">Last Hour</div>
-                <div class="time-filter" onclick="filterSignals('strong')">Strong Signals</div>
-                <div class="time-filter" onclick="filterSignals('active')">Active Trades</div>
+                <div class="time-filter active" data-filter="all" onclick="filterSignals('all')">📊 All Signals</div>
+                <div class="time-filter" data-filter="today" onclick="filterSignals('today')">📅 Today</div>
+                <div class="time-filter" data-filter="1h" onclick="filterSignals('1h')">⏰ Last Hour</div>
+                <div class="time-filter" data-filter="strong" onclick="filterSignals('strong')">💪 Strong Signals</div>
+                <div class="time-filter" data-filter="active" onclick="filterSignals('active')">✅ Active Trades</div>
             </div>
 
             <!-- Signal Grid -->
@@ -133,19 +773,19 @@
             <div class="alert-system">
                 <div class="alert-header">
                     <div class="alert-icon">🔔</div>
-                    <h2 class="alert-title">Signal Alert System</h2>
+                    <h2 class="alert-title">Real-Time Signal Alerts</h2>
                 </div>
-                <p style="color: #94a3b8; margin-bottom: 25px; font-size: 1.6rem; line-height: 1.6;">
-                    Get instant notifications when new trading signals are generated. Connect to Telegram, Email, or SMS.
+                <p class="alert-description">
+                    Never miss a trading opportunity. Get instant notifications when new signals are generated. Choose your preferred notification method.
                 </p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="alert-buttons">
                     <button class="btn btn-primary" onclick="setupTelegramAlerts()">
                         📱 Telegram Alerts
                     </button>
                     <button class="btn btn-success" onclick="setupEmailAlerts()">
                         📧 Email Alerts
                     </button>
-                    <button class="btn" style="background: #8b5cf6; color: white;" onclick="setupSMSAlerts()">
+                    <button class="btn btn-purple" onclick="setupSMSAlerts()">
                         💬 SMS Alerts
                     </button>
                 </div>
@@ -154,19 +794,19 @@
             <!-- Performance Stats -->
             <div class="performance-stats">
                 <div class="stat-card">
-                    <div class="stat-value positive">87.3%</div>
+                    <div class="stat-value positive" id="accuracyStat">87.3%</div>
                     <div class="stat-label">Signal Accuracy</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value positive">+42.8%</div>
+                    <div class="stat-value positive" id="profitStat">+42.8%</div>
                     <div class="stat-label">Monthly Profit</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">156</div>
+                    <div class="stat-value" id="signalsCount">156</div>
                     <div class="stat-label">Signals This Month</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value negative">-12.4%</div>
+                    <div class="stat-value negative" id="drawdownStat">-12.4%</div>
                     <div class="stat-label">Max Drawdown</div>
                 </div>
             </div>
@@ -174,8 +814,9 @@
 
         <script>
             // Sample Signals Data
-            const signals = [
+            const signalsData = [
                 {
+                    id: 1,
                     pair: "EUR/USD",
                     type: "buy",
                     entry: "1.08450",
@@ -185,9 +826,11 @@
                     strength: "high",
                     pips: "35",
                     time: "2 min ago",
+                    timestamp: Date.now() - 120000,
                     active: true
                 },
                 {
+                    id: 2,
                     pair: "GBP/JPY",
                     type: "sell",
                     entry: "188.420",
@@ -197,9 +840,11 @@
                     strength: "medium",
                     pips: "52",
                     time: "15 min ago",
+                    timestamp: Date.now() - 900000,
                     active: true
                 },
                 {
+                    id: 3,
                     pair: "USD/CAD",
                     type: "buy",
                     entry: "1.35280",
@@ -209,9 +854,11 @@
                     strength: "high",
                     pips: "52",
                     time: "45 min ago",
+                    timestamp: Date.now() - 2700000,
                     active: true
                 },
                 {
+                    id: 4,
                     pair: "AUD/USD",
                     type: "sell",
                     entry: "0.65820",
@@ -221,9 +868,11 @@
                     strength: "low",
                     pips: "32",
                     time: "1 hour ago",
+                    timestamp: Date.now() - 3600000,
                     active: false
                 },
                 {
+                    id: 5,
                     pair: "XAU/USD",
                     type: "buy",
                     entry: "2035.40",
@@ -233,9 +882,11 @@
                     strength: "medium",
                     pips: "146",
                     time: "2 hours ago",
+                    timestamp: Date.now() - 7200000,
                     active: true
                 },
                 {
+                    id: 6,
                     pair: "USD/JPY",
                     type: "sell",
                     entry: "148.150",
@@ -245,9 +896,12 @@
                     strength: "high",
                     pips: "55",
                     time: "3 hours ago",
+                    timestamp: Date.now() - 10800000,
                     active: false
                 }
             ];
+
+            let currentSignals = [...signalsData];
 
             // Generate Signal Card HTML
             function generateSignalCard(signal) {
@@ -255,7 +909,7 @@
                 const strengthColors = { high: "high", medium: "medium", low: "low" };
                 
                 return `
-                    <div class="signal-card ${signal.type}" data-strength="${signal.strength}" data-active="${signal.active}">
+                    <div class="signal-card ${signal.type}" data-id="${signal.id}" data-strength="${signal.strength}" data-active="${signal.active}">
                         <div class="signal-header">
                             <div class="signal-pair">${signal.pair}</div>
                             <div class="signal-type ${signal.type}">${signal.type.toUpperCase()}</div>
@@ -263,7 +917,7 @@
                         
                         <div class="signal-details">
                             <div class="signal-detail">
-                                <div class="detail-label">Entry Price</div>
+                                <div class="detail-label">Entry</div>
                                 <div class="detail-value">${signal.entry}</div>
                             </div>
                             <div class="signal-detail">
@@ -281,9 +935,9 @@
                         </div>
                         
                         <div class="signal-strength">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="color: #94a3b8; font-size: 1.3rem;">Signal Strength</span>
-                                <span style="font-weight: 600; text-transform: capitalize;">${signal.strength}</span>
+                            <div class="strength-header">
+                                <span class="strength-label">Signal Strength</span>
+                                <span class="strength-value">${signal.strength}</span>
                             </div>
                             <div class="strength-bar">
                                 <div class="strength-fill ${strengthColors[signal.strength]}" style="width: ${strengthWidths[signal.strength]}"></div>
@@ -291,14 +945,14 @@
                         </div>
                         
                         <div class="signal-footer">
-                            <div>
-                                <div style="font-size: 1.3rem; color: #94a3b8;">Potential Pips</div>
-                                <div style="font-size: 1.8rem; font-weight: 600; color: ${signal.type === 'buy' ? '#10b981' : '#ef4444'}">${signal.pips}</div>
+                            <div class="signal-pips">
+                                <div class="pips-label">Potential Pips</div>
+                                <div class="pips-value ${signal.type}">${signal.pips}</div>
                             </div>
-                            <div>
+                            <div class="signal-info">
                                 <div class="signal-time">${signal.time}</div>
-                                <div style="padding: 4px 12px; background: ${signal.active ? 'rgba(16, 185, 129, 0.2)' : 'rgba(148, 163, 184, 0.2)'}; color: ${signal.active ? '#10b981' : '#94a3b8'}; border-radius: 12px; font-size: 1.2rem; margin-top: 5px;">
-                                    ${signal.active ? 'ACTIVE' : 'CLOSED'}
+                                <div class="signal-status ${signal.active ? 'active' : 'closed'}">
+                                    ${signal.active ? '● ACTIVE' : '○ CLOSED'}
                                 </div>
                             </div>
                         </div>
@@ -306,93 +960,109 @@
                 `;
             }
 
+            // Render Signals
+            function renderSignals() {
+                const container = document.getElementById('signalContainer');
+                if (container) {
+                    container.innerHTML = currentSignals.map(generateSignalCard).join('');
+                }
+            }
+
             // Filter Signals
             function filterSignals(filter) {
-                const filters = document.querySelectorAll('.time-filter');
-                filters.forEach(f => f.classList.remove('active'));
+                // Update active filter UI
+                document.querySelectorAll('.time-filter').forEach(f => {
+                    f.classList.remove('active');
+                });
                 event.target.classList.add('active');
                 
-                let filteredSignals = [...signals];
+                let filteredSignals = [...signalsData];
                 
                 switch(filter) {
                     case 'today':
-                        filteredSignals = signals.filter(s => s.time.includes('min') || s.time.includes('hour'));
+                        filteredSignals = signalsData.filter(s => {
+                            const hoursAgo = (Date.now() - s.timestamp) / 3600000;
+                            return hoursAgo <= 24;
+                        });
                         break;
                     case '1h':
-                        filteredSignals = signals.filter(s => s.time.includes('min') || (s.time.includes('hour') && parseInt(s.time) <= 1));
+                        filteredSignals = signalsData.filter(s => {
+                            const minutesAgo = (Date.now() - s.timestamp) / 60000;
+                            return minutesAgo <= 60;
+                        });
                         break;
                     case 'strong':
-                        filteredSignals = signals.filter(s => s.strength === 'high');
+                        filteredSignals = signalsData.filter(s => s.strength === 'high');
                         break;
                     case 'active':
-                        filteredSignals = signals.filter(s => s.active);
+                        filteredSignals = signalsData.filter(s => s.active);
                         break;
+                    default:
+                        filteredSignals = [...signalsData];
                 }
                 
-                const container = document.getElementById('signalContainer');
-                container.innerHTML = filteredSignals.map(generateSignalCard).join('');
+                currentSignals = filteredSignals;
+                renderSignals();
+                
+                // Update signals count display
+                const signalsCountElement = document.getElementById('signalsCount');
+                if (signalsCountElement) {
+                    signalsCountElement.textContent = filteredSignals.length;
+                }
             }
 
             // Generate New Signal
             function generateNewSignal() {
-                const pairs = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "USD/CAD", "NZD/USD", "EUR/GBP", "GBP/JPY"];
+                const pairs = ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD", "USD/CAD", "NZD/USD", "EUR/GBP", "GBP/JPY", "USD/CHF"];
                 const types = ["buy", "sell"];
                 const timeframes = ["M5", "M15", "M30", "H1", "H4"];
                 const strengths = ["high", "medium", "low"];
                 
+                const basePrice = types[Math.floor(Math.random() * types.length)] === "buy" ? 1.08 : 1.26;
+                const entry = (basePrice + (Math.random() * 0.01)).toFixed(5);
+                const tpOffset = types.includes("buy") ? 0.003 : -0.003;
+                const slOffset = types.includes("buy") ? -0.002 : 0.002;
+                
                 const newSignal = {
+                    id: Date.now(),
                     pair: pairs[Math.floor(Math.random() * pairs.length)],
                     type: types[Math.floor(Math.random() * types.length)],
-                    entry: (1 + Math.random() * 0.5).toFixed(5),
-                    stopLoss: (1 + Math.random() * 0.5).toFixed(5),
-                    takeProfit: (1 + Math.random() * 0.5).toFixed(5),
+                    entry: entry,
+                    stopLoss: (parseFloat(entry) + slOffset).toFixed(5),
+                    takeProfit: (parseFloat(entry) + tpOffset).toFixed(5),
                     timeframe: timeframes[Math.floor(Math.random() * timeframes.length)],
                     strength: strengths[Math.floor(Math.random() * strengths.length)],
                     pips: Math.floor(Math.random() * 100) + 20,
                     time: "Just now",
+                    timestamp: Date.now(),
                     active: true
                 };
                 
-                const container = document.getElementById('signalContainer');
-                container.insertAdjacentHTML('afterbegin', generateSignalCard(newSignal));
+                // Add to beginning of array
+                signalsData.unshift(newSignal);
+                currentSignals = [...signalsData];
+                renderSignals();
                 
                 // Show notification
-                showNotification(`New ${newSignal.type.toUpperCase()} signal: ${newSignal.pair}`);
-            }
-
-            // Alert Setup Functions
-            function setupTelegramAlerts() {
-                alert('Telegram Alert Setup:\n\n1. Join @MT5BotSignals\n2. Click /start\n3. Receive real-time signals\n\nSignals delivered every 5-15 minutes.');
-            }
-
-            function setupEmailAlerts() {
-                alert('Email Alert Setup:\n\nEnter your email to receive daily signal summaries and urgent trade alerts.');
-                const email = prompt('Enter your email address:');
-                if (email) {
-                    alert(`Alerts enabled for: ${email}\nCheck your inbox for confirmation.`);
-                }
-            }
-
-            function setupSMSAlerts() {
-                alert('SMS Alerts (Premium Feature):\n\nReceive urgent signals via SMS. Requires phone verification and premium subscription.');
+                showNotification(`🎯 New ${newSignal.type.toUpperCase()} Signal: ${newSignal.pair}\nEntry: ${newSignal.entry} | TP: ${newSignal.takeProfit}`);
+                
+                // Update stats
+                updateStats();
             }
 
             // Show Notification
             function showNotification(message) {
                 const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 100px;
-                    right: 20px;
-                    background: #3b82f6;
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 10px;
-                    z-index: 10000;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-                    animation: slideIn 0.3s ease;
+                notification.className = 'notification';
+                notification.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem;">🔔</span>
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 0.3rem;">New Signal Alert</div>
+                            <div style="font-size: 1.3rem; color: var(--gray-300);">${message}</div>
+                        </div>
+                    </div>
                 `;
-                notification.textContent = message;
                 document.body.appendChild(notification);
                 
                 setTimeout(() => {
@@ -401,40 +1071,101 @@
                 }, 5000);
             }
 
+            // Update Performance Stats
+            function updateStats() {
+                const activeSignals = signalsData.filter(s => s.active);
+                const winRate = 87.3; // Simulated
+                const monthlyProfit = 42.8; // Simulated
+                const maxDrawdown = 12.4; // Simulated
+                
+                const accuracyElement = document.getElementById('accuracyStat');
+                const profitElement = document.getElementById('profitStat');
+                const signalsCountElement = document.getElementById('signalsCount');
+                const drawdownElement = document.getElementById('drawdownStat');
+                
+                if (accuracyElement) accuracyElement.textContent = `${winRate}%`;
+                if (profitElement) profitElement.textContent = `+${monthlyProfit}%`;
+                if (signalsCountElement) signalsCountElement.textContent = signalsData.length;
+                if (drawdownElement) drawdownElement.textContent = `-${maxDrawdown}%`;
+            }
+
+            // Alert Setup Functions
+            function setupTelegramAlerts() {
+                const confirmMsg = "📱 Telegram Alerts Setup\n\nJoin our Telegram channel to receive:\n• Real-time trading signals\n• Market analysis updates\n• Educational content\n\nProceed to join?";
+                if (confirm(confirmMsg)) {
+                    window.open("https://t.me/mt5bot", "_blank");
+                    showNotification("✅ Opening Telegram channel...");
+                }
+            }
+
+            function setupEmailAlerts() {
+                const email = prompt("📧 Email Alerts Setup\n\nEnter your email address to receive daily signal summaries:", "trader@example.com");
+                if (email && email.includes('@')) {
+                    localStorage.setItem('alertEmail', email);
+                    showNotification(`✅ Email alerts enabled for ${email}`);
+                    alert(`Email alerts configured for:\n${email}\n\nCheck your inbox for confirmation.`);
+                } else if (email) {
+                    alert("Please enter a valid email address.");
+                }
+            }
+
+            function setupSMSAlerts() {
+                alert("💬 SMS Alerts (Premium Feature)\n\nSMS alerts are available for Pro and VIP plan subscribers.\n\nUpgrade your plan to receive:\n• Instant trade alerts via SMS\n• Critical market updates\n• Account notifications\n\nVisit Pricing page to upgrade.");
+            }
+
+            // Toggle Mobile Menu
+            function toggleMenu() {
+                const menu = document.getElementById('mobileMenu');
+                if (menu) {
+                    menu.classList.toggle('active');
+                }
+            }
+
+            // Auto-refresh time ago
+            function refreshTimeAgo() {
+                const now = Date.now();
+                const timeElements = document.querySelectorAll('.signal-time');
+                
+                timeElements.forEach((el, index) => {
+                    const signal = signalsData[index];
+                    if (signal) {
+                        const minutesAgo = Math.floor((now - signal.timestamp) / 60000);
+                        if (minutesAgo < 1) {
+                            el.textContent = "Just now";
+                        } else if (minutesAgo < 60) {
+                            el.textContent = `${minutesAgo} min ago`;
+                        } else {
+                            const hoursAgo = Math.floor(minutesAgo / 60);
+                            el.textContent = `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+                        }
+                    }
+                });
+            }
+
             // Initialize
             document.addEventListener('DOMContentLoaded', function() {
-                // Load initial signals
-                const container = document.getElementById('signalContainer');
-                container.innerHTML = signals.map(generateSignalCard).join('');
+                renderSignals();
+                updateStats();
                 
-                // Simulate new signals every 2-5 minutes
+                // Simulate new signals every 2-4 minutes
                 setInterval(() => {
-                    if (Math.random() > 0.7) {
+                    if (Math.random() > 0.65) {
                         generateNewSignal();
                     }
-                }, 120000 + Math.random() * 180000);
+                }, 120000 + Math.random() * 120000);
                 
-                // Auto-refresh signals every 30 seconds
-                setInterval(() => {
-                    const cards = document.querySelectorAll('.signal-card');
-                    cards.forEach(card => {
-                        const timeEl = card.querySelector('.signal-time');
-                        if (timeEl) {
-                            const time = timeEl.textContent;
-                            if (time.includes('min')) {
-                                const mins = parseInt(time);
-                                if (!isNaN(mins)) {
-                                    timeEl.textContent = `${mins + 1} min ago`;
-                                }
-                            } else if (time.includes('hour')) {
-                                const hours = parseInt(time);
-                                if (!isNaN(hours)) {
-                                    timeEl.textContent = `${hours + 1} hours ago`;
-                                }
-                            }
-                        }
-                    });
-                }, 60000);
+                // Refresh time ago every minute
+                setInterval(refreshTimeAgo, 60000);
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    const menu = document.getElementById('mobileMenu');
+                    if (menu) {
+                        menu.classList.remove('active');
+                    }
+                });
             });
         </script>
     </body>
